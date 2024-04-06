@@ -1,0 +1,53 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "attogram",
+      "name": "Attogram Project",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8653063?v=4",
+      "profile": "https://attogram.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "willb335",
+      "name": "Will",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/10157307?v=4",
+      "profile": "https://github.com/willb335",
+      "contributions": [
+        "question",
+        "ideas"
+      ]
+    },
+    {
+      "login": "slig",
+      "name": "Tiago Serafim",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/37779?v=4",
+      "profile": "https://github.com/slig",
+      "contributions": [
+        "question",
+        "ideas"
+      ]
+    },
+    {
+      "login": "cityseven",
+      "name": "cityseven",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/49065505?v=4",
+      "profile": "https://github.com/cityseven",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "EightQueens",
+  "projectOwner": "attogram",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}

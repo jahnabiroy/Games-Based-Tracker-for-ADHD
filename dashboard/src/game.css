@@ -1,0 +1,19 @@
+.square {
+    width: 100px;
+    height: 100px;
+    font-size: 36px;
+  }
+  
+  .board {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .board-row {
+    display: flex;
+  }
+  
+  .status {
+    margin-bottom: 10px;
+  }
+  

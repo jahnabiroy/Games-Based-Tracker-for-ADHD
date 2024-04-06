@@ -18,12 +18,12 @@ function Navbar() {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                             <Link to='/' className='text-decoration-none text-black'>
-                                <a className="nav-link" href="#">Home</a>
+                                home
                             </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Link</a>
-                            </li>
+                            <Link to='/game' className='text-decoration-none text-black'>
+                                game
+                            </Link>
                         </ul>
                     </div>
                     </div>
