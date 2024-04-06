@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe Game</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
 </head>
 <body>
     <h1>Tic-Tac-Toe Game</h1>
-    <table>
-        {% for row in game._current_moves %}
-            <tr>
-                {% for move in row %}
-                    <td>{{ move.label }}</td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+    <div id="game-board">
+        <!-- This is where the game board will be rendered -->
+    </div>
+
+    <script>
+        // Add your JavaScript code here
+    </script>
 </body>
 </html>
