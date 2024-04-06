@@ -10,6 +10,8 @@ from 'react-router-dom';
 import Navbar from './navbar'
 import Landing from './home/home'
 import Game from './game';
+import CupGame from './cupgame';
+import MemoryMatchingGame from './memorymatching';
 
 class App extends Component {
   render() {
@@ -19,6 +21,8 @@ class App extends Component {
         <Routes>
           <Route path='/' element={<Landing />}></Route>  
           <Route path='/game' element={<Game />}></Route>  
+          <Route path='/cupgame' element={<CupGame />}></Route>  
+          <Route path='/memorymatching' element={<MemoryMatchingGame />}></Route>  
         </Routes>
       </Router>
     );

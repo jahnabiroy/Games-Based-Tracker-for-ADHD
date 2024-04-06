@@ -1,0 +1,47 @@
+.cup-game {
+    text-align: center;
+  }
+  
+  .cup-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .cup {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border: 2px solid #333;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out; /* Adding animation for cup movement */
+  }
+  
+  .cup:hover {
+    transform: translateY(-5px); /* Adding a slight upward movement when hovering */
+  }
+  
+  
+  .ball {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    border-radius: 50%;
+  }
+  
+  .shuffle-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .message {
+    font-size: 18px;
+    font-weight: bold;
+    color: blue;
+  }
+  
