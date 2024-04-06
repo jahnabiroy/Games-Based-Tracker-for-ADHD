@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="300" height="300"></canvas>
+    <script>
+        // JavaScript code for Tic-Tac-Toe game goes here
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Draw the Tic-Tac-Toe grid
+        function drawGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw horizontal lines
+            ctx.beginPath();
+            ctx.moveTo(0, 100);
+            ctx.lineTo(300, 100);
+            ctx.moveTo(0, 200);
+            ctx.lineTo(300, 200);
+            ctx.stroke();
+
+            // Draw vertical lines
+            ctx.beginPath();
+            ctx.moveTo(100, 0);
+            ctx.lineTo(100, 300);
+            ctx.moveTo(200, 0);
+            ctx.lineTo(200, 300);
+            ctx.stroke();
+        }
+
+        // Handle click event on canvas
+        canvas.addEventListener('click', function(event) {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Determine which cell was clicked
+            const cellX = Math.floor(x / 100);
+            const cellY = Math.floor(y / 100);
+
+            // Draw X or O in the clicked cell
+            const cellCenterX = cellX * 100 + 50;
+            const cellCenterY = cellY * 100 + 50;
+            ctx.font = '48px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = 'black';
+            ctx.fillText('X', cellCenterX, cellCenterY); // Change to 'O' as needed
+        });
+
+        // Initial drawing of the grid
+        drawGrid();
+    </script>
+</body>
+</html>
