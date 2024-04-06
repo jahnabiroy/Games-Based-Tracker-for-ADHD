@@ -1,17 +1,27 @@
 import { useState } from 'react'
 import React from 'react'
-import adhd from './assets/adhd.webp'
+import {Component} from "react"
+import {  
+  BrowserRouter as Router,  
+  Routes,  
+  Route,   
+}   
+from 'react-router-dom';
 import Navbar from './navbar'
+import Landing from './home/home'
 
-function App() {
-  return (
-    <>
-      <Navbar />
-      <div className='container-fluid' style={{backgroundImage: `url(${adhd})`}}>
-        <h1 className='text-white text-center' style={{fontSize:`15rem`, textShadow: `2px 2px 4px #000`}}>ADHD</h1>
-      </div>
-    </>
-  )
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div><Navbar /></div>
+        <Routes>
+          <Route path='/' element={<Landing />}></Route>  
+        </Routes>
+      </Router>
+    );
+  }
 }
 
-export default App
+export default App;
+
