@@ -9,9 +9,10 @@ import {
 from 'react-router-dom';
 import Navbar from './navbar'
 import Landing from './home/home'
-import Game from './game';
-import CupGame from './cupgame';
-import MemoryMatchingGame from './memorymatching';
+import Login from './login/login';
+import Training from './training/training';
+import Register from './registration/register';
+import Footer from './footer';
 
 class App extends Component {
   render() {
@@ -19,11 +20,12 @@ class App extends Component {
       <Router>
         <div><Navbar /></div>
         <Routes>
-          <Route path='/' element={<Landing />}></Route>  
-          <Route path='/game' element={<Game />}></Route>  
-          <Route path='/cupgame' element={<CupGame />}></Route>  
-          <Route path='/memorymatching' element={<MemoryMatchingGame />}></Route>  
+          <Route path='/' element={<Landing />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/training' element={<Training />}></Route>  
+          <Route path='/register' element={<Register />}></Route> 
         </Routes>
+        <div><Footer /></div>
       </Router>
     );
   }
