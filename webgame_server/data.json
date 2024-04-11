@@ -1,0 +1,17 @@
+{
+  "jahnabi": {
+    "password": "jahnabiroy",
+    "age": 25,
+    "score": 0
+  },
+  "abhinav": {
+    "password": "abhinav",
+    "age": 30,
+    "score": 0
+  },
+  "yappy": {
+    "password": "yapjahnabi",
+    "age": "19",
+    "score": 0
+  }
+}
