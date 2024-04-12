@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './EightQueen.css';
+import './EigthQueen.css';
 
 const EightQueens = () => {
   const [queens, setQueens] = useState([]);
@@ -9,8 +9,7 @@ const EightQueens = () => {
       (queen) =>
         queen.row !== row &&
         queen.col !== col &&
-        Math.abs(queen.row - row) !== Math.abs(queen.col - col) &&
-        Math.abs(queen.row + row) !== Math.abs(queen.col + col)
+        Math.abs(queen.row - row) !== Math.abs(queen.col - col)
     );
 
     if (isValidMove) {

@@ -7,6 +7,8 @@ import Reg from './Reg/reg';
 import Profile from './Profile/profile';
 import TicTacToe from './Training/Tictactoe';
 import EightQueensGame from './Training/EigthQueen';
+import BetterAim from './Training/betterAim';
+import jigsaw from './Training/jigsaw';
 function App() {
   return (
     <div className="App">
@@ -19,6 +21,8 @@ function App() {
           <Route path='/profile' element = {<Profile />}/>
           <Route path='tictactoe' element = {<TicTacToe />} />
           <Route path='eightQueen' element = {<EightQueensGame />} />
+          <Route path='betterAim' element = {<BetterAim />} />
+          <Route path='jigsaw' element = {<jigsaw/>} />
         </Routes>
       </Router>
     </div>

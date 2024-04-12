@@ -19,6 +19,8 @@ export default function Profile() {
                     <h1 className='text-white' style={{fontFamily: `monospace`}}>USER PROFILE</h1>
                     <Link to='/tictactoe'>TicTacToe</Link>
                     <Link to='/eightQueen'>EightQueensGame</Link>
+                    <Link to='/betterAim'>BetterAim </Link>
+                    <Link to='/jigsaw'>Jigsaw </Link>
                     <div className='col-md-3'></div>
                     <div className='col-md-6 text-white' style={{border: '1px solid #fff', borderRadius: '10px', background: 'transparent', backdropFilter: 'blur(15px)'}}>
                         <div className='row'>
