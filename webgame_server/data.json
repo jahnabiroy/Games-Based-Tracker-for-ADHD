@@ -13,5 +13,10 @@
     "password": "yapjahnabi",
     "age": "19",
     "score": 0
+  },
+  "thanos": {
+    "password": "thanos",
+    "age": "1000",
+    "score": 0
   }
 }
