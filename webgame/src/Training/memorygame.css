@@ -1,0 +1,29 @@
+.memory-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px); /* Adjust based on the number of cards */
+    grid-gap: 10px;
+  }
+  
+  .card {
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .card.flipped {
+    background-color: white;
+    border: 1px solid black;
+  }
+  

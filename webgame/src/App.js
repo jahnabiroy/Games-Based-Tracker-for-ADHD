@@ -8,7 +8,10 @@ import Profile from './Profile/profile';
 import TicTacToe from './Training/Tictactoe';
 import EightQueensGame from './Training/EigthQueen';
 import BetterAim from './Training/betterAim';
+import MemoryGame from './Training/memorygame';
+import ThreeCupSortingGame from './Training/cup';
 import jigsaw from './Training/jigsaw';
+import TowerOfHanoi from './Training/hanoi';
 function App() {
   return (
     <div className="App">
@@ -23,6 +26,9 @@ function App() {
           <Route path='eightQueen' element = {<EightQueensGame />} />
           <Route path='betterAim' element = {<BetterAim />} />
           <Route path='jigsaw' element = {<jigsaw/>} />
+          <Route path='memorygame' element = {<MemoryGame/>} />
+          <Route path='cupgame' element = {<ThreeCupSortingGame/>} />
+          <Route path='hanoi' element = {<TowerOfHanoi/>} />
         </Routes>
       </Router>
     </div>

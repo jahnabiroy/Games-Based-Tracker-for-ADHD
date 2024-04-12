@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  .title {
+    color: #333;
+  }
+  
+  .towers {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+  }
+  
+  
+  .disk {
+    background-color: #009688;
+    height: 20px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .tower {
+    width: 10px;
+    height: 300px;
+    background-color: #555;
+    display: inline-block;
+    position: relative;
+  }
+  
+  #bar0, #bar1, #bar2 {
+    width: 10px;
+    height: 300px; /* Same as .tower */
+    background-color: #555; /* Same as .tower */
+    display: inline-block;
+    position: relative;
+  }
+  

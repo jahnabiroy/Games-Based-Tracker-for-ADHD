@@ -1,0 +1,49 @@
+.three-cup-sorting-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.cups-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cup {
+    width: 100px;
+    height: 150px;
+    background-color: transparent;
+    border: 2px solid black;
+    position: relative;
+    cursor: pointer;
+}
+
+.cup.red {
+    border-color: red;
+}
+
+.cup.green {
+    border-color: green;
+}
+
+.cup.blue {
+    border-color: blue;
+}
+
+.cup.ball-inside .ball {
+    display: block;
+}
+
+.ball {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none; /* Initially hide the ball */
+}

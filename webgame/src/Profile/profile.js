@@ -21,6 +21,9 @@ export default function Profile() {
                     <Link to='/eightQueen'>EightQueensGame</Link>
                     <Link to='/betterAim'>BetterAim </Link>
                     <Link to='/jigsaw'>Jigsaw </Link>
+                    <Link to='/memorygame'>MemoryGame </Link>
+                    <Link to='/cupgame'>CupGame </Link>
+                    <Link to='/hanoi'>TowerOfHanoi </Link>
                     <div className='col-md-3'></div>
                     <div className='col-md-6 text-white' style={{border: '1px solid #fff', borderRadius: '10px', background: 'transparent', backdropFilter: 'blur(15px)'}}>
                         <div className='row'>
