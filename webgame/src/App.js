@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import Reg from './Reg/reg';
 import Profile from './Profile/profile';
 import TicTacToe from './Training/Tictactoe';
-
+import EightQueensGame from './Training/EigthQueen';
 function App() {
   return (
     <div className="App">
@@ -18,6 +18,7 @@ function App() {
           <Route path="/register" element = {<Reg/>}/>
           <Route path='/profile' element = {<Profile />}/>
           <Route path='tictactoe' element = {<TicTacToe />} />
+          <Route path='eightQueen' element = {<EightQueensGame />} />
         </Routes>
       </Router>
     </div>
