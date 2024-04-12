@@ -120,10 +120,20 @@ app.get('/profile', (req, res) => {
 
         const { age, score } = user;
 
-        res.json({ message: "Why fit in when you were born to stand out!", username: username_logged, age: age, score:score });
+        res.json({ message: "Why fit in when you were born to stand out! - Dr. Suess", username: username_logged, age: age, score:score });
     });
 });
 
+app.post('/game', (req, res) => {
+    const { winner } = req.body;
+    if (winner === 'X' || winner === 'O') {
+        // Do something with the winner data, e.g., save it to a file
+        console.log(`Winner: ${winner}`);
+        res.json({ success: true, message: "Winner data received successfully" });
+    } else {
+        res.status(400).json({ success: false, message: "Invalid winner data" });
+    }
+});
 
 app.listen(8000, () => {
     console.log(`Server is running on port 8000.`);

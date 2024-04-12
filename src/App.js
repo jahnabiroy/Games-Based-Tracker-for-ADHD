@@ -5,6 +5,7 @@ import Login from './Login/login';
 import Navbar from './Navbar';
 import Reg from './Reg/reg';
 import Profile from './Profile/profile';
+import TicTacToe from './Training/Tictactoe';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element = {<Login/>}/>
           <Route path="/register" element = {<Reg/>}/>
           <Route path='/profile' element = {<Profile />}/>
+          <Route path='tictactoe' element = {<TicTacToe />} />
         </Routes>
       </Router>
     </div>

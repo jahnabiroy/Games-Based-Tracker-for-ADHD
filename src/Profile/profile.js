@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import bkg from '../assets/adhdback.png'
 import pfp from '../assets/profile.jpg'
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
     const [userData, setUserData] = useState({ message: "", username: "", age: "" });
@@ -15,14 +16,14 @@ export default function Profile() {
         <div>
             <div className="container-fluid" style={{ backgroundImage: `url(${bkg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center top', backgroundSize: 'cover' }}>
                 <div className='row p-5'>
-                    <h1 className='text-white'>USER PROFILE</h1>
+                    <h1 className='text-white' style={{fontFamily: `monospace`}}>USER PROFILE</h1>
+                    <Link to='/tictactoe'>TicTacToe</Link>
                     <div className='col-md-3'></div>
                     <div className='col-md-6 text-white' style={{border: '1px solid #fff', borderRadius: '10px', background: 'transparent', backdropFilter: 'blur(15px)'}}>
                         <div className='row'>
                             <div className='col-md-5'>
                                 <img src={pfp} alt='lol' width={'70%'} style={{margin: `20px`, borderRadius: `75px`, marginTop: `25px`}}/>
                                 <h1 className='mx-3 mb-4' style={{fontFamily: 'monospace'}}>{userData.username}</h1>
-                                <div className='vertical-line'></div>
                             </div>
                             <div className='col-md-7'>
                                 <div className='mx-1'>
