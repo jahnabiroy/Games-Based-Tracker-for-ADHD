@@ -135,6 +135,16 @@ app.post('/game', (req, res) => {
     }
 });
 
+app.post('/memorygame', (req, res) => {
+    const { rightMatches, wrongMatches } = req.body;
+    console.log('Received right matches:', rightMatches);
+    console.log('Received wrong matches:', wrongMatches);
+
+    var score = rightMatches*2 - wrongMatches;
+
+    res.status(200).send({score});
+});
+
 app.listen(8000, () => {
     console.log(`Server is running on port 8000.`);
 });

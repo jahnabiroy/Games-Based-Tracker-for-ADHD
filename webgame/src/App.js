@@ -10,7 +10,7 @@ import EightQueensGame from './Training/EigthQueen';
 import BetterAim from './Training/betterAim';
 import MemoryGame from './Training/memorygame';
 import ThreeCupSortingGame from './Training/cup';
-import jigsaw from './Training/jigsaw';
+import Jigsaw from './Training/jigsaw';
 import TowerOfHanoi from './Training/hanoi';
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           <Route path='tictactoe' element = {<TicTacToe />} />
           <Route path='eightQueen' element = {<EightQueensGame />} />
           <Route path='betterAim' element = {<BetterAim />} />
-          <Route path='jigsaw' element = {<jigsaw/>} />
+          <Route path='jigsaw' element = {<Jigsaw/>} />
           <Route path='memorygame' element = {<MemoryGame/>} />
           <Route path='cupgame' element = {<ThreeCupSortingGame/>} />
           <Route path='hanoi' element = {<TowerOfHanoi/>} />

@@ -20,7 +20,7 @@ export default function Profile() {
                     <Link to='/tictactoe'>TicTacToe</Link>
                     <Link to='/eightQueen'>EightQueensGame</Link>
                     <Link to='/betterAim'>BetterAim </Link>
-                    <Link to='/jigsaw'>Jigsaw </Link>
+                    {/* <Link to='/jigsaw'>Jigsaw </Link> */}
                     <Link to='/memorygame'>MemoryGame </Link>
                     <Link to='/cupgame'>CupGame </Link>
                     <Link to='/hanoi'>TowerOfHanoi </Link>

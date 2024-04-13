@@ -7,14 +7,14 @@
   
   .cards-grid {
     display: grid;
-    grid-template-columns: repeat(4, 100px); /* Adjust based on the number of cards */
-    grid-gap: 10px;
+    grid-template-columns: repeat(4, 200px);
+    grid-gap: 20px;
   }
   
   .card {
-    width: 100px;
-    height: 100px;
-    background-color: lightblue;
+    width: 200px;
+    height: 100px !important;
+    background-color: rgb(176, 205, 215);
     display: flex;
     justify-content: center;
     align-items: center;
