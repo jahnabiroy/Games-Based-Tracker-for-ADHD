@@ -3,8 +3,11 @@ import './EigthQueen.css';
 
 const EightQueens = () => {
   const [queens, setQueens] = useState([]);
+  const [gameWon, setGameWon] = useState(false);
 
   const handleCellClick = (row, col) => {
+    if (gameWon) return; // Prevent placing queens after winning the game
+
     const isValidMove = queens.every(
       (queen) =>
         queen.row !== row &&
@@ -13,7 +16,11 @@ const EightQueens = () => {
     );
 
     if (isValidMove) {
-      setQueens([...queens, { row, col }]);
+      const newQueens = [...queens, { row, col }];
+      setQueens(newQueens);
+      if (newQueens.length === 8) {
+        setGameWon(true);
+      }
     } else {
       alert('Invalid move! Queens cannot attack each other.');
     }
@@ -42,10 +49,17 @@ const EightQueens = () => {
     return <div className="board">{board}</div>;
   };
 
+  const handleReset = () => {
+    setQueens([]);
+    setGameWon(false);
+  };
+
   return (
     <div>
       <h1>8 Queens Game</h1>
+      {gameWon ? <div>You won!</div> : null}
       {renderBoard()}
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
 };
