@@ -3,6 +3,10 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-image: url('download.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-attachment: fixed; /* Add this line */
   }
   
   .cards-grid {

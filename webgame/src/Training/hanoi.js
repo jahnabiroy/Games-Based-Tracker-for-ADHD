@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./hanoi.css";
-
+import moveSoundFile from "./move-sound.mp3";
 const App = () => {
+  const [moveSound] = useState(new Audio(moveSoundFile));
   const [moveCount, setMoveCount] = useState(0);
   const [dragId, setDragId] = useState();
   const [tiles, setTiles] = useState([
@@ -71,6 +72,7 @@ const App = () => {
         if (tile.id === dragTile.id) {
           tile.column = parseInt(dropColumn, 10);
           setMoveCount(moveCount + 1);
+          moveSound.play();
         }
 
         return tile;
@@ -78,6 +80,7 @@ const App = () => {
     }
 
     setTiles(newTileState);
+    moveSound.play();
   };
 
   const column1Tiles = tiles.filter((tile) => tile.column === 1);

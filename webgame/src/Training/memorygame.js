@@ -9,9 +9,26 @@ const MemoryGame = () => {
     const [wrongMatches, setWrongMatches] = useState([]);
 
     function createDeck() {
-        const symbols = ['🍎', '🍌', '🍉', '🍇', '🥑', '🍓', '🍊', '🍍'];
-        const deck = symbols.concat(symbols);
-        return shuffle(deck.map((symbol, index) => ({ symbol, index })));
+        // Replace symbols with image URLs
+        const imageUrls = [
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+            "puzzle.png",
+        ];
+        return shuffle(imageUrls.map((url, index) => ({ url, index })));
     }
 
     function shuffle(array) {
@@ -38,7 +55,7 @@ const MemoryGame = () => {
         const firstCard = cards[firstIndex];
         const secondCard = cards[secondIndex];
 
-        if (firstCard.symbol === secondCard.symbol) {
+        if (firstCard.url === secondCard.url) {
             setMatchedIndexes([...matchedIndexes, firstIndex, secondIndex]);
             setRightMatches([...rightMatches, firstIndex, secondIndex]);
         } else {
@@ -80,20 +97,25 @@ const MemoryGame = () => {
 
     return (
         <div className='container-fluid'>
-        <div className="memory-game">
-            <div className="cards-grid">
-                {cards.map((card, index) => (
-                    <div
-                        key={index}
-                        className={`card ${flippedIndexes.includes(index) || matchedIndexes.includes(index) ? 'flipped' : ''}`}
-                        onClick={() => handleCardClick(index)}
-                    >
-                        {flippedIndexes.includes(index) || matchedIndexes.includes(index) ? card.symbol : '?'}
-                    </div>
-                ))}
-                <button className='btn btn-warning' onClick={restartGame}>Restart Game</button>
+            <div className="memory-game">
+                <div className="cards-grid">
+                    {cards.map((card, index) => (
+                        <div
+                            key={index}
+                            className={`card ${flippedIndexes.includes(index) || matchedIndexes.includes(index) ? 'flipped' : ''}`}
+                            onClick={() => handleCardClick(index)}
+                        >
+                            {/* Replace text symbol with img element */}
+                            {flippedIndexes.includes(index) || matchedIndexes.includes(index) ? (
+                                <img src={card.url} alt={`Card ${index}`} />
+                            ) : (
+                                <img src="card-back.jpg" alt="Card Back" />
+                            )}
+                        </div>
+                    ))}
+                    <button className='btn btn-warning' onClick={restartGame}>Restart Game</button>
+                </div>
             </div>
-        </div>
         </div>
     );
 };
