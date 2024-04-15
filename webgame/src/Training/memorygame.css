@@ -1,33 +1,40 @@
 .memory-game {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: url('download.jpg');
-    background-size: cover; 
-    background-position: center;
-    background-attachment: fixed; /* Add this line */
-  }
-  
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 200px);
-    grid-gap: 20px;
-  }
-  
-  .card {
-    width: 200px;
-    height: 100px !important;
-    background-color: rgb(176, 205, 215);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .card.flipped {
-    background-color: white;
-    border: 1px solid black;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 200px);
+  grid-gap: 20px;
+}
+
+.card {
+  width: 200px;
+  height: 100px !important;
+  background-color: rgb(176, 205, 215);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  font-size: 3.5rem;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  transform: scale(1.2);
+}
+
+.card.flipped {
+  background-color: white;
+  border: 1px solid black;
+  transform: rotateY(180deg) scale(1.2);
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}

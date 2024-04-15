@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './memorygame.css';
+import right from '../right_answer.wav'
+import wrong from '../wrong_answer.mp3'
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const MemoryGame = () => {
     const [cards] = useState(createDeck());
@@ -7,28 +11,16 @@ const MemoryGame = () => {
     const [matchedIndexes, setMatchedIndexes] = useState([]);
     const [rightMatches, setRightMatches] = useState([]);
     const [wrongMatches, setWrongMatches] = useState([]);
+    const [elapsedTime, setElapsedTime] = useState(0); // State for elapsed time
+    const [winner, setWinner] = useState(false); // State to track if the game is won
+
+    const correctAudio = new Audio(right);
+    const wrongAudio = new Audio(wrong);
 
     function createDeck() {
-        // Replace symbols with image URLs
-        const imageUrls = [
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-            "puzzle.png",
-        ];
-        return shuffle(imageUrls.map((url, index) => ({ url, index })));
+        const symbols = ['🍎', '🍌', '🍉', '🍇', '🥑', '🍓', '🍊', '🍍'];
+        const deck = symbols.concat(symbols);
+        return shuffle(deck.map((symbol, index) => ({ symbol, index })));
     }
 
     function shuffle(array) {
@@ -55,11 +47,13 @@ const MemoryGame = () => {
         const firstCard = cards[firstIndex];
         const secondCard = cards[secondIndex];
 
-        if (firstCard.url === secondCard.url) {
+        if (firstCard.symbol === secondCard.symbol) {
             setMatchedIndexes([...matchedIndexes, firstIndex, secondIndex]);
             setRightMatches([...rightMatches, firstIndex, secondIndex]);
+            correctAudio.play();
         } else {
             setWrongMatches([...wrongMatches, firstIndex, secondIndex]);
+            wrongAudio.play();
         }
 
         setFlippedIndexes([]);
@@ -70,7 +64,26 @@ const MemoryGame = () => {
         setMatchedIndexes([]);
         setRightMatches([]);
         setWrongMatches([]);
+        setElapsedTime(0);
+        setWinner(false); // Reset winner state
     }
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setElapsedTime(prevTime => prevTime + 1); // Increment elapsed time every second
+        }, 1000);
+
+        return () => {
+            clearInterval(timer); // Clean up the timer
+        };
+    }, []); // Runs once on component mount
+
+    useEffect(() => {
+        if (rightMatches.length / 2 === 8) {
+            console.log("congrats");
+            setWinner(true); // Set winner state to true when the game is won
+        }
+    }, [rightMatches]);
 
     useEffect(() => {
         const sendData = async () => {
@@ -86,7 +99,7 @@ const MemoryGame = () => {
                     }),
                 });
                 const responseData = await response.json(); // Get response as text
-                console.log('Response from server:', responseData.score); // Log response dat
+                console.log('Response from server:', responseData.score); // Log response data
             } catch (error) {
                 console.error('Error sending data:', error);
             }
@@ -97,27 +110,47 @@ const MemoryGame = () => {
 
     return (
         <div className='container-fluid'>
+            <h1 className='text-white mt-5' style={{fontFamily: `monospace`, fontSize: `3.5rem`}}>MEMORY GAME</h1>
             <div className="memory-game">
-                <div className="cards-grid">
+                <div className="cards-grid" style={{fontFamily: `monospace`}}>
                     {cards.map((card, index) => (
                         <div
                             key={index}
                             className={`card ${flippedIndexes.includes(index) || matchedIndexes.includes(index) ? 'flipped' : ''}`}
                             onClick={() => handleCardClick(index)}
                         >
-                            {/* Replace text symbol with img element */}
-                            {flippedIndexes.includes(index) || matchedIndexes.includes(index) ? (
-                                <img src={card.url} alt={`Card ${index}`} />
-                            ) : (
-                                <img src="card-back.jpg" alt="Card Back" />
-                            )}
+                            {flippedIndexes.includes(index) || matchedIndexes.includes(index) ? card.symbol : '💡💭'}
                         </div>
                     ))}
-                    <button className='btn btn-warning' onClick={restartGame}>Restart Game</button>
+                    <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, transition: 'transform 0.2s'}} onClick={restartGame}>Restart Game</button>
+                    <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>✅ {rightMatches.length/2}</button>
+                    <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>❌ {wrongMatches.length/2}</button>
+                    <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>⏰ {formatTime(elapsedTime)}</button>
                 </div>
             </div>
+            {winner && (
+                <Popup
+                    position="top center"
+                    closeOnDocumentClick
+                    contentStyle={{ padding: "20px", border: "1px solid #ccc", borderRadius: "5px", width: "200px" }}
+                    arrow={false}
+                    trigger={<div style={{ display: 'none' }}>Winner Trigger</div>} // Hide the trigger
+                >
+                    <div>Congratulations! You won the game!</div>
+                    <button className="btn btn-warning" onClick={restartGame}>Play Again</button>
+                </Popup>
+                )}
+
+
         </div>
     );
 };
+
+// Function to format time as MM:SS
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+}
 
 export default MemoryGame;
