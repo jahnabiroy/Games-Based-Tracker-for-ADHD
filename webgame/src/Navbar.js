@@ -30,7 +30,7 @@ export default function Navbar() {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-sm navbar-dark" style={{ backgroundColor: `#64057e`, boxShadow: `0 2px 4px rgba(0,0,0,0.25)` }}>
+            <nav className="navbar navbar-expand-sm navbar-dark" style={{ backgroundColor: `#440455` }}>
                 <div className="container">
                     <a className="navbar-brand" href='/'>ChAAD</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,17 +39,19 @@ export default function Navbar() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="nav navbar-nav ms-auto">
                             <li className="navitem">
-                                <Link to='/' className='text-decoration-none'>
-                                    <span className='align-middle p-4 text-white'>HOME</span>
-                                </Link>
                                 {isLoggedIn ? (
                                     <Link to='/' onClick={handleLogout} className='btn btn-danger' style={{ borderRadius: `10px`, marginLeft: '10px' }}>
                                         <span className='align-middle p-2 text-white' style={{ fontWeight: `500` }}>LOGOUT</span>
                                     </Link>
                                 ) : (
+                                    <div>
+                                    <Link to='/' className='text-decoration-none'>
+                                        <span className='align-middle p-4 text-white'>HOME</span>
+                                    </Link>
                                     <Link to='/login' className='btn btn-warning' role="button" style={{ borderRadius: `10px`, marginLeft: '10px' }}>
                                         <span className='align-middle p-2 text-dark' style={{ fontWeight: `500` }}>LOGIN</span>
                                     </Link>
+                                    </div>
                                 )}
                             </li>
                         </ul>

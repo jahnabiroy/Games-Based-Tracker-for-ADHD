@@ -75,7 +75,7 @@ export default function Reg() {
                             <h6 className='text-white text-center'>Already have an account?
                                 <Link to='/login' style={{ textDecoration: 'none', color: 'white', paddingLeft: '5px', fontWeight: 'bolder' }}>Login here</Link>
                             </h6>
-                            <h5 className={`${redirect ? 'text-green' : 'text-maroon'}`} style={{backgroundColor: `#ffc107` , padding: `2px`, borderRadius : `8px`, fontWeight: `600`, marginTop: `3px`, fontFamily: `monospace`}}>{message}</h5>
+                            <h5 className={`${redirect ? 'text-green' : 'text-maroon'} text-center`} style={{backgroundColor: `#ffc107` , padding: `2px`, borderRadius : `8px`, fontWeight: `600`, marginTop: `3px`, fontFamily: `monospace`}}>{message}</h5>
                     </div>
                     <div className="col-md-4"></div>
                 </div>

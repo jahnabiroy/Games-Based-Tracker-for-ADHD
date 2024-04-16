@@ -14,6 +14,7 @@ import ThreeCupSortingGame from './Training/cup';
 import TowerOfHanoi from './Training/hanoi';
 import Game from './Training/15puzzle/Game';
 import NumberPuzzle from './Training/arrange';
+import Training from './Training/training';
 function App() {
   return (
     <div className="App">
@@ -33,6 +34,7 @@ function App() {
           <Route path='hanoi' element = {<TowerOfHanoi/>} />
           <Route path='/game' element = {<Game />} />
           <Route path='/numberpuzzle' element = {<NumberPuzzle />} />
+          <Route path='/training' element = {<Training />} />
         </Routes>
       </Router>
     </div>

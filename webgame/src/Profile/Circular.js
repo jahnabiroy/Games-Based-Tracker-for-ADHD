@@ -8,7 +8,7 @@ export function DoughnutGraph({ score }) {
     labels: ['Score', ''],
     datasets: [
       {
-        label: 'Your ADHD Score',
+        label: 'Keep Going! You can do this!',
         data: [score, 100 - score],
         backgroundColor: [
           '#ffc107',
@@ -24,7 +24,14 @@ export function DoughnutGraph({ score }) {
   };
 
   const options = {
-    cutout: '50%'
+    cutout: '50%',
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white', // Change the color of the label text here
+        },
+      },
+    },
   };
 
   return <Doughnut data={data} options={options} />;

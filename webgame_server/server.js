@@ -120,9 +120,49 @@ app.get('/profile', (req, res) => {
 
         const { age, score } = user;
 
-        res.json({ message: "Why fit in when you were born to stand out! - Dr. Suess", username: username_logged, age: age, score:score });
+        res.json({ message: "Why fit in when you were born to stand out!", username: username_logged, age: age, score:score });
     });
 });
+
+app.post('/profile', (req, res) => {
+    // Extract the totalPoints data from the request body
+    const { totalPoints } = req.body;
+
+    // Read the data.json file
+    fs.readFile(dataFilePath, (err, data) => {
+        if (err) {
+            console.error("Error reading data file:", err);
+            return res.status(500).json({ success: false, message: "Internal Server Error" });
+        }
+
+        // Parse the JSON data
+        let userData = {};
+        try {
+            userData = JSON.parse(data);
+        } catch (error) {
+            console.error("Error parsing JSON data:", error);
+            return res.status(500).json({ success: false, message: "Internal Server Error" });
+        }
+
+        // Update the user's score in the userData object
+        if (userData[username_logged]) {
+            userData[username_logged].score = totalPoints;
+        } else {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        // Write the updated userData object back to data.json
+        fs.writeFile(dataFilePath, JSON.stringify(userData, null, 2), (err) => {
+            if (err) {
+                console.error("Error writing data to file:", err);
+                return res.status(500).json({ success: false, message: "Internal Server Error" });
+            }
+            console.log("User score updated successfully:", username_logged);
+            res.json({ success: true, message: "User score updated successfully" });
+        });
+    });
+});
+
 
 app.post('/game', (req, res) => {
     const { winner } = req.body;

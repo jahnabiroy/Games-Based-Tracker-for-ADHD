@@ -60,13 +60,13 @@ export default function Login() {
                             />
                             <br />
                             <button onClick={() => { authenticateCredentials(); handleLogin()}} className={`btn ${redirect ? 'btn-success' : 'btn-warning'} ${redirect ? 'text-white' : 'text-dark'} fw-bold`} style={{ borderRadius: '15px', justifyContent: 'center', alignItems: 'center', display: 'flex', margin: '3px', width: '100%'}}>
-                                {redirect ? 'GO TO TRAINING' : 'LOGIN'}
+                                {redirect ? 'GO TO PROFILE' : 'LOGIN'}
                             </button>
                             <br />
                             <h6 className='text-white text-center'>Don't have an account?
                                 <Link to='/register' style={{ textDecoration: 'none', color: 'white', paddingLeft: '5px', fontWeight: 'bolder' }}>Register here</Link>
                             </h6>
-                            <h5 className={`${redirect ? 'text-green' : 'text-maroon'}`} style={{backgroundColor: `#ffc107` , padding: `1px`, borderRadius : `8px`, fontWeight: `600`, marginTop: `3px`, fontFamily: `monospace`}}>{message}</h5>
+                            <h5 className={`${redirect ? 'text-green' : 'text-maroon'} text-center`} style={{backgroundColor: `#ffc107` , padding: `1px`, borderRadius : `8px`, fontWeight: `600`, marginTop: `3px`, fontFamily: `monospace`}}>{message}</h5>
                     </div>
                     <div className="col-md-4"></div>
                 </div>

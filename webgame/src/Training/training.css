@@ -1,0 +1,9 @@
+.turns {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: default;
+  }
+
+.turns:hover {
+    transform: rotateY(180deg) scale(1.01);
+  }
