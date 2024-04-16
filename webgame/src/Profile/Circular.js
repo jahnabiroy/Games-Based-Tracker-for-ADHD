@@ -1,49 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-const CircularGraph = ({ score }) => {
-  const [chartData, setChartData] = useState({});
-
-  useEffect(() => {
-    const updatedData = {
-      datasets: [{
+export function DoughnutGraph({ score }) {
+  // Dynamically update the data based on the score prop
+  const data = {
+    labels: ['Score', ''],
+    datasets: [
+      {
+        label: 'Your ADHD Score',
         data: [score, 100 - score],
-        backgroundColor: ['green', 'lightgrey']
-      }]
-    };
+        backgroundColor: [
+          '#ffc107',
+          'rgba(54, 162, 235, 0)',
+        ],
+        borderColor: [
+          '#ffc107',
+          '#ffc107',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-    setChartData(updatedData);
+  const options = {
+    cutout: '50%'
+  };
 
-    // Clean up chart instance when component unmounts
-    return () => {
-      if (this.chartInstance) {
-        this.chartInstance.destroy();
-      }
-    };
-  }, [score]);
-
-  return (
-    <div>
-      <h2>Circular Graph</h2>
-      <Doughnut
-        data={chartData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            }
-          }
-        }}
-        redraw={true} // Force redraw to avoid canvas error
-        onElementsClick={(elems) => {
-          // Handle click events on chart elements
-          console.log(elems);
-        }}
-      />
-    </div>
-  );
-};
-
-export default CircularGraph;
+  return <Doughnut data={data} options={options} />;
+}

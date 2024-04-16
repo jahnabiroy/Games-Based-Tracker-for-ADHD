@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import bkg from '../assets/adhdback.png'
 import pfp from '../assets/profile.jpg'
-import { Link } from 'react-router-dom';
+import { DoughnutGraph } from './Circular';
+// import { Link } from 'react-router-dom';
 
 export default function Profile() {
     const [userData, setUserData] = useState({ message: "", username: "", age: "" });
@@ -16,17 +17,26 @@ export default function Profile() {
         <div>
             <div className="container-fluid" style={{ backgroundImage: `url(${bkg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center top', backgroundSize: 'cover' }}>
                 <div className='row p-5'>
-                    <h1 className='text-white' style={{fontFamily: `monospace`}}>USER PROFILE</h1>
-                    <Link to='/tictactoe'>TicTacToe</Link>
+                    {/* <h1 className='text-white' style={{fontFamily: `monospace`}}>USER PROFILE</h1> */}
+                    {/* <Link to='/tictactoe'>TicTacToe</Link>
                     <Link to='/eightQueen'>EightQueensGame</Link>
                     <Link to='/betterAim'>BetterAim </Link>
-                    {/* <Link to='/jigsaw'>Jigsaw </Link> */}
                     <Link to='/memorygame'>MemoryGame </Link>
                     <Link to='/cupgame'>CupGame </Link>
                     <Link to='/hanoi'>TowerOfHanoi </Link>
-                    <Link to='/numberpuzzle'>NumberPuzzle </Link>
-                    <div className='col-md-3'></div>
-                    <div className='col-md-6 text-white' style={{border: '1px solid #fff', borderRadius: '10px', background: 'transparent', backdropFilter: 'blur(15px)'}}>
+                    <Link to='/numberpuzzle'>NumberPuzzle </Link> */}
+                    <div className='col-md-6 text-white mx-5 py-3 px-4' style={{border: '1px solid #fff', borderRadius: '10px', background: 'transparent', backdropFilter: 'blur(15px)', fontFamily: `monospace`}}>
+                        <div className='row'>
+                        <div className='col-md-5'>
+                            <div><DoughnutGraph score={userData.score} /></div>
+                        </div>
+                        <div className='col-md-6'>
+                            <div style={{fontSize: `2em`}}>⌛ History</div>
+                            <hr/>
+                        </div>
+                        </div>
+                    </div>
+                    <div className='col-md-5 text-white' style={{border: '1px solid #fff', borderRadius: '10px', background: 'transparent', backdropFilter: 'blur(15px)'}}>
                         <div className='row'>
                             <div className='col-md-5'>
                                 <img src={pfp} alt='lol' width={'70%'} style={{margin: `20px`, borderRadius: `75px`, marginTop: `25px`}}/>
@@ -58,7 +68,6 @@ export default function Profile() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-md-3'></div>
                 </div>
             </div>
         </div>
