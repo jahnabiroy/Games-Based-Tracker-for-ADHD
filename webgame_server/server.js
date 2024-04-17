@@ -1,7 +1,9 @@
+
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const e = require('cors');
 
 const app = express();
 
@@ -118,9 +120,10 @@ app.get('/profile', (req, res) => {
             return res.status(404).json({ success: false, message: "User not found" });
         }
 
-        const { age, score } = user;
+        const { age, score, hanoi, numberpuzzle, eightqueen } = user;
+        // console.log("User profile retrieved successfully:", username_logged, age, score, eightqueen, hanoi, numberpuzzle);
 
-        res.json({ message: "Why fit in when you were born to stand out!", username: username_logged, age: age, score:score });
+        res.json({ message: "Why fit in when you were born to stand out!", username: username_logged, age: age, score:score, hanoi:hanoi, numberpuzzle:numberpuzzle, eightqueen:eightqueen});
     });
 });
 
@@ -143,8 +146,6 @@ app.post('/profile', (req, res) => {
             console.error("Error parsing JSON data:", error);
             return res.status(500).json({ success: false, message: "Internal Server Error" });
         }
-
-        // Update the user's score in the userData object
         if (userData[username_logged]) {
             userData[username_logged].score = totalPoints;
         } else {
@@ -175,15 +176,135 @@ app.post('/game', (req, res) => {
     }
 });
 
+// app.post('/memorygame', (req, res) => {
+//     const { rightMatches, wrongMatches } = req.body;
+//     console.log('Received right matches:', rightMatches);
+//     console.log('Received wrong matches:', wrongMatches);
+
+//     var score = rightMatches*2 - wrongMatches;
+
+//     res.status(200).send({score});
+// });
+
 app.post('/memorygame', (req, res) => {
     const { rightMatches, wrongMatches } = req.body;
-    console.log('Received right matches:', rightMatches);
-    console.log('Received wrong matches:', wrongMatches);
-
+    const username = username_logged; // Assuming you have user information available in req.user
     var score = rightMatches*2 - wrongMatches;
-
-    res.status(200).send({score});
+    // Read the existing JSON file
+    fs.readFile(dataFilePath, (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send({ error: 'Internal server error' });
+        }
+        let users = JSON.parse(data);
+        // console.log('Parsed users:', users); // Debug statement
+        if (users[username]) {
+            users[username].memory = score;
+        } else {
+            // If the username doesn't exist, create a new entry
+            users[username] = { memory: score };
+        }
+        // console.log('Updated users:', users); // Debug statement
+        fs.writeFile(dataFilePath, JSON.stringify(users, null, 2), (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return res.status(500).send({ error: 'Internal server error' });
+            }
+            console.log('Score updated successfully for', username);
+            res.status(200).send({ score: users[username].score });
+        });
+    });
 });
+
+app.post('/numberpuzzle', (req, res) => {
+    const { moves, timeTaken } = req.body;
+    const username = username_logged; // Assuming you have user information available in req.user
+    var score = moves*2 - timeTaken;
+    // Read the existing JSON file
+    fs.readFile(dataFilePath, (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send({ error: 'Internal server error' });
+        }
+        let users = JSON.parse(data);
+        // console.log('Parsed users:', users); // Debug statement
+        if (users[username]) {
+            users[username].numberpuzzle = score;
+        } else {
+            // If the username doesn't exist, create a new entry
+            users[username] = { numberpuzzle: score };
+        }
+        // console.log('Updated users:', users); // Debug statement
+        fs.writeFile(dataFilePath, JSON.stringify(users, null, 2), (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return res.status(500).send({ error: 'Internal server error' });
+            }
+            console.log('Score updated successfully for', username);
+            res.status(200).send({ score: users[username].score });
+        });
+    });
+});
+
+app.post('/hanoi', (req, res) => {
+    const { moves, timeTaken } = req.body;
+    const username = username_logged; // Assuming you have user information available in req.user
+    var score = moves*2 - timeTaken;
+    // Read the existing JSON file
+    fs.readFile(dataFilePath, (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send({ error: 'Internal server error' });
+        }
+        let users = JSON.parse(data);
+        // console.log('Parsed users:', users); // Debug statement
+        if (users[username]) {
+            users[username].hanoi = score;
+        } else {
+            // If the username doesn't exist, create a new entry
+            users[username] = { hanoi: score };
+        }
+        // console.log('Updated users:', users); // Debug statement
+        fs.writeFile(dataFilePath, JSON.stringify(users, null, 2), (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return res.status(500).send({ error: 'Internal server error' });
+            }
+            console.log('Score updated successfully for', username);
+            res.status(200).send({ score: users[username].score });
+        });
+    });
+});
+
+app.post('/EightQueen', (req, res) => {
+    const { queensPlaced } = req.body;
+    const username = username_logged; // Assuming you have user information available in req.user
+    // Read the existing JSON file
+    fs.readFile(dataFilePath, (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send({ error: 'Internal server error' });
+        }
+        let users = JSON.parse(data);
+        // console.log('Parsed users:', users); // Debug statement
+        if (users[username]) {
+            users[username].eightqueen = queensPlaced * 2;
+        } else {
+            // If the username doesn't exist, create a new entry
+            users[username] = { eightqueen: queensPlaced * 2 };
+        }
+        // console.log('Updated users:', users); // Debug statement
+        fs.writeFile(dataFilePath, JSON.stringify(users, null, 2), (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return res.status(500).send({ error: 'Internal server error' });
+            }
+            console.log('Score updated successfully for', username);
+            res.status(200).send({ score: users[username].score });
+        });
+    });
+});
+
 
 app.listen(8000, () => {
     console.log(`Server is running on port 8000.`);

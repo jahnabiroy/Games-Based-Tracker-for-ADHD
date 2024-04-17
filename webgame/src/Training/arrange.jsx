@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './arrange.css';
 import moveSoundFile from './move-sound.mp3';
 
 const NumberPuzzle = () => {
   const [numbers, setNumbers] = useState(generateNumbers());
   const [gameWon, setGameWon] = useState(false);
+  const [moveCount, setMoveCount] = useState(0);
+  const [timer, setTimer] = useState(0);
   const moveSound = new Audio(moveSoundFile);
+
+  useEffect(() => {
+    let interval;
+    if (!gameWon) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [gameWon]);
 
   function generateNumbers() {
     let nums = [];
@@ -30,6 +42,7 @@ const NumberPuzzle = () => {
     [newNumbers[index1], newNumbers[index2]] = [newNumbers[index2], newNumbers[index1]];
     setNumbers(newNumbers);
     moveSound.play();
+    setMoveCount((prevCount) => prevCount + 1);
     if (isGameWon(newNumbers)) {
       setGameWon(true);
     }
@@ -47,6 +60,14 @@ const NumberPuzzle = () => {
   function handleReset() {
     setNumbers(generateNumbers());
     setGameWon(false);
+    setMoveCount(0);
+    setTimer(0);
+  }
+  function handleCheatCode() {
+    const correctOrder = Array.from({ length: 15 }, (_, index) => index + 1);
+    correctOrder.push(null);
+    setNumbers(correctOrder);
+    setGameWon(true);
   }
 
   const renderCell = (number, index) => {
@@ -79,14 +100,47 @@ const NumberPuzzle = () => {
     return (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
            (Math.abs(col - emptyCol) === 1 && row === emptyRow);
   };
+  useEffect(() => {
+    const sendData = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/numberpuzzle', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    moves: moveCount,
+                    timeTaken: timer,
+                }),
+            });
+            const responseData = await response.json(); // Get response as text
+            console.log('Response from server:', responseData.score); // Log response data
+        } catch (error) {
+            console.error('Error sending data:', error);
+        }
+    };
+
+    if (gameWon) {
+      sendData();
+  }
+}, [gameWon, moveCount, timer]);
 
   return (
     <div>
       <div className="puzzle-board">
         {numbers.map((number, index) => renderCell(number, index))}
       </div>
-      {gameWon && <div className="win-message">You win!</div>}
-      <button onClick={handleReset}>Reset</button>
+      <div className="game-info">
+        <div>Move Count: {moveCount}</div>
+        <div>Timer: {timer} seconds</div>
+        <button onClick={handleReset}>Reset</button>
+        <button onClick={handleCheatCode}>Cheat Code</button>
+      </div>
+      {gameWon && (
+        <div className="win-modal">
+          <div className="win-message">Congratulations! You win!</div>
+        </div>
+      )}
     </div>
   );
 };

@@ -18,9 +18,11 @@ export default function Profile() {
     useEffect(() => {
         fetch("http://localhost:8000/profile")
             .then((res) => res.json())
-            .then((data) => setUserData({ message: data.message, username: data.username, age: data.age, score: data.score }));
+            .then((data) => setUserData({ message: data.message, username: data.username, age: data.age, score: data.score,
+                                        hanoi : data.hanoi,
+                                        eightQueen : data.eightqueen,
+                                        numberpuzzle : data.numberpuzzle}));
     }, []);
-
     return (
         <div>
             <div className="container-fluid" style={{backgroundColor: `#64057e`}}>
@@ -42,6 +44,9 @@ export default function Profile() {
                         <div className='col-md-6'>
                             <div style={{fontSize: `1.5em`}}>⌛ HISTORY </div>
                             <hr/>
+                            <div>
+                                {userData.hanoi}
+                            </div>
                         </div>
                         </div>
                     </div>

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './memorygame.css';
 import right from '../right_answer.wav'
 import wrong from '../wrong_answer.mp3'
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+// import Popup from 'reactjs-popup';
+// import 'reactjs-popup/dist/index.css';
 
 const MemoryGame = () => {
     const [cards] = useState(createDeck());
@@ -80,10 +80,10 @@ const MemoryGame = () => {
 
     useEffect(() => {
         if (rightMatches.length / 2 === 8) {
-            console.log("congrats");
+            console.log(winner);
             setWinner(true); // Set winner state to true when the game is won
         }
-    }, [rightMatches]);
+    }, [rightMatches, winner]);
 
     useEffect(() => {
         const sendData = async () => {
@@ -104,9 +104,10 @@ const MemoryGame = () => {
                 console.error('Error sending data:', error);
             }
         };
-
-        sendData();
-    }, [rightMatches, wrongMatches]);
+        if(winner){
+            sendData();
+        }
+    }, [rightMatches, wrongMatches, winner]);
 
     return (
         <div className='container-fluid'>
@@ -129,16 +130,16 @@ const MemoryGame = () => {
                 </div>
             </div>
             {winner && (
-                <Popup
-                    position="top center"
-                    closeOnDocumentClick
-                    contentStyle={{ padding: "20px", border: "1px solid #ccc", borderRadius: "5px", width: "200px" }}
-                    arrow={false}
-                    trigger={<div style={{ display: 'none' }}>Winner Trigger</div>} // Hide the trigger
-                >
-                    <div>Congratulations! You won the game!</div>
-                    <button className="btn btn-warning" onClick={restartGame}>Play Again</button>
-                </Popup>
+                <div className="win-message">
+                    Congratulations!
+                <div className="win-subtitle">
+                    You are on the go!
+                </div>
+                <div className='win-subtitle'>
+                    <button onClick={restartGame}>Play Again</button>
+                    <button onClick={restartGame}>Go to Profile</button>
+                </div>
+                </div>
                 )}
 
 

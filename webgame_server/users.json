@@ -2,11 +2,7 @@
   "jahnabi": {
     "password": "jahnabiroy",
     "age": 25,
-    "score": 18,
-    "eightqueen": 16,
-    "hanoi": -68,
-    "numberpuzzle": -1,
-    "memory": 6
+    "score": 18
   },
   "abhinav": {
     "password": "abhinav",
@@ -21,9 +17,6 @@
   "thanos": {
     "password": "thanos",
     "age": "1000",
-    "score": 18,
-    "eightqueen": 16,
-    "hanoi": 2,
-    "numberpuzzle": -1
+    "score": 16
   }
 }

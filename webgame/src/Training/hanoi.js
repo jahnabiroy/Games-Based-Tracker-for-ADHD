@@ -1,48 +1,101 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./hanoi.css";
 import moveSoundFile from "./move-sound.mp3";
+import Confetti from 'react-confetti';
+
 const App = () => {
   const [moveSound] = useState(new Audio(moveSoundFile));
+  const [gameWon, setGameWon] = useState(false);
   const [moveCount, setMoveCount] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [timer, setTimer] = useState(0);
   const [dragId, setDragId] = useState();
   const [tiles, setTiles] = useState([
     {
       id: "Tile-1",
       column: 1,
       row: 1,
-      width: 2
+      width: 5,
+      color: "rgb(175, 6, 237)", // Add color property
+      border: `1px solid rgb(175, 6, 237)`
     },
     {
       id: "Tile-2",
       column: 1,
       row: 2,
-      width: 4
+      width: 7,
+      color: "rgb(97, 5, 130)", // Add color property
+      border: `1px solid rgb(97, 5, 130)`
     },
     {
       id: "Tile-3",
       column: 1,
       row: 3,
-      width: 6
+      width: 9,
+      color: "rgb(55, 4, 73)", // Add color property
+      border: `1px solid rgb(55, 4, 73)`
     },
     {
       id: "Tile-4",
       column: 1,
       row: 4,
-      width: 8
-    },
-    {
-      id: "Tile-5",
-      column: 1,
-      row: 5,
-      width: 10
-    },
-    {
-      id: "Tile-6",
-      column: 1,
-      row: 6,
-      width: 12
+      width: 11,
+      color: "rgb(26, 6, 34)", // Add color property
+      border: `1px solid rgb(26, 6, 34)`
     }
   ]);
+
+  function restartGame() {
+    setGameWon(false);
+    setMoveCount(0);
+    setShowConfetti(false);
+    setTimer(0);
+    setDragId("");
+    setTiles([
+      {
+        id: "Tile-1",
+        column: 1,
+        row: 1,
+        width: 5,
+        color: "rgb(175, 6, 237)", // Add color property
+        border: `1px solid rgb(175, 6, 237)`
+      },
+      {
+        id: "Tile-2",
+        column: 1,
+        row: 2,
+        width: 7,
+        color: "rgb(97, 5, 130)", // Add color property
+        border: `1px solid rgb(97, 5, 130)`
+      },
+      {
+        id: "Tile-3",
+        column: 1,
+        row: 3,
+        width: 9,
+        color: "rgb(55, 4, 73)", // Add color property
+        border: `1px solid rgb(55, 4, 73)`
+      },
+      {
+        id: "Tile-4",
+        column: 1,
+        row: 4,
+        width: 11,
+        color: "rgb(26, 6, 34)", // Add color property
+        border: `1px solid rgb(26, 6, 34)`
+      }
+    ])
+  };
+
+  useEffect(() => {
+    let interval;
+    if (!gameWon) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [gameWon]);
 
   const handleDrag = (ev) => {
     const dragTile = tiles.find((tile) => tile.id === ev.currentTarget.id);
@@ -55,6 +108,9 @@ const App = () => {
     } else {
       ev.preventDefault();
     }
+    if (isGameWon(tiles)) {
+      setGameWon(true);
+    }
   };
 
   const handleDrop = (ev) => {
@@ -65,8 +121,7 @@ const App = () => {
       .filter((tile) => tile.column.toString() === dropColumn.toString())
       .sort((a, b) => a.width - b.width)[0];
 
-    let newTileState = tiles;
-
+    let newTileState = tiles.slice();
     if (!dropColumnTopTile || dragTile.width < dropColumnTopTile.width) {
       newTileState = tiles.map((tile) => {
         if (tile.id === dragTile.id) {
@@ -88,19 +143,34 @@ const App = () => {
   const column3Tiles = tiles.filter((tile) => tile.column === 3);
 
   const winCondition = tiles.every((tile) => tile.column === 3);
+  useEffect(() => {
+    const sendData = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/hanoi', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    moves: moveCount,
+                    timeTaken: timer,
+                }),
+            });
+            const responseData = await response.json(); // Get response as text
+            console.log('Response from server:', responseData.score); // Log response data
+        } catch (error) {
+            console.error('Error sending data:', error);
+        }
+    };
+
+    if (winCondition) {
+      setShowConfetti(true);
+      sendData();
+  }
+}, [gameWon, moveCount, timer, winCondition]);
   return (
     <>
       <div className="App">
-        <div className="instructions">
-          <div>
-            <span className="text-title">Objective:</span> Rebuild the tower in
-            the third column in as little moves as possible
-          </div>
-          <div>
-            <span className="text-title">Instructions:</span> Move one tile at a
-            time, bigger tiles cannot go on top of smaller tiles
-          </div>
-        </div>
         <div className="content">
           <div
             className="column-container"
@@ -114,7 +184,11 @@ const App = () => {
               .map((tile, index) => {
                 const tileCount = column1Tiles.length;
                 const tileStyles = {
-                  width: `${tile.width}em`
+                  width: `${tile.width}em`,
+                  backgroundColor: tile.color, // Apply background color based on the color property
+                  border: tile.border,
+                  transform: `translateZ(${index * 2}px)`, // Apply Z-axis translation for 3D effect
+                  transition: "transform 0.5s ease" // Add transition for smooth animation
                 };
                 tileStyles.marginTop =
                   index === 0 ? `calc(80vh - ${tileCount * 40 + 20}px)` : "0";
@@ -143,7 +217,11 @@ const App = () => {
               .map((tile, index) => {
                 const tileCount = column2Tiles.length;
                 const tileStyles = {
-                  width: `${tile.width}em`
+                  width: `${tile.width}em`,
+                  backgroundColor: tile.color, // Apply background color based on the color property
+                  border: tile.border,
+                  transform: `translateZ(${index * 2}px)`, // Apply Z-axis translation for 3D effect
+                  transition: "transform 0.5s ease" // Add transition for smooth animation
                 };
                 tileStyles.marginTop =
                   index === 0 ? `calc(80vh - ${tileCount * 40 + 20}px)` : "0";
@@ -172,7 +250,11 @@ const App = () => {
               .map((tile, index) => {
                 const tileCount = column3Tiles.length;
                 const tileStyles = {
-                  width: `${tile.width}em`
+                  width: `${tile.width}em`,
+                  backgroundColor: tile.color, // Apply background color based on the color property
+                  border: tile.border,
+                  transform: `translateZ(${index * 2}px)`, // Apply Z-axis translation for 3D effect
+                  transition: "transform 0.5s ease" // Add transition for smooth animation
                 };
                 tileStyles.marginTop =
                   index === 0 ? `calc(80vh - ${tileCount * 40 + 20}px)` : "0";
@@ -190,19 +272,29 @@ const App = () => {
               })}
           </div>
         </div>
+        {showConfetti && <Confetti />}
         {winCondition && (
           <div className="win-message">
-            You Win!
+            CONGRATULATIONS!
             <div className="win-subtitle">
-              You did it in <span className="win-number">{moveCount}</span>{" "}
-              moves
+              You did it in <span className="win-number">{moveCount}</span>{" "} moves
+            </div>
+            <div className="win-subtitle">
+              <button className="btn btn-warning" onClick={restartGame}> Play Again </button>
+              <button className="btn btn-warning">Go to Profile</button>
             </div>
           </div>
         )}
         Move count: {moveCount}
+        <br />
+        Time: {timer} seconds
       </div>
     </>
   );
 };
+
+function isGameWon(tiles) {
+  return tiles.every((tile) => tile.column === 1);
+}
 
 export default App;

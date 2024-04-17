@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import './EigthQueen.css';
 
 const EightQueens = () => {
   const [queens, setQueens] = useState([]);
   const [gameWon, setGameWon] = useState(false);
+  const [queensPlaced, setQueensPlaced] = useState(0); // State variable to keep track of the number of queens placed
 
   const handleCellClick = (row, col) => {
     if (gameWon) return; // Prevent placing queens after winning the game
@@ -18,6 +19,7 @@ const EightQueens = () => {
     if (isValidMove) {
       const newQueens = [...queens, { row, col }];
       setQueens(newQueens);
+      setQueensPlaced(newQueens.length); // Update the number of queens placed
       if (newQueens.length === 8) {
         setGameWon(true);
       }
@@ -52,12 +54,35 @@ const EightQueens = () => {
   const handleReset = () => {
     setQueens([]);
     setGameWon(false);
+    setQueensPlaced(0); // Reset the number of queens placed
   };
-
+  useEffect(() => {
+    const sendData = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/EightQueen', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  queensPlaced: queensPlaced
+                }),
+            });
+            const responseData = await response.json(); // Get response as text
+            console.log('Response from server:', responseData.score); // Log response data
+        } catch (error) {
+            console.error('Error sending data:', error);
+        }
+    };
+    if(gameWon){
+      sendData();
+    }
+}, [queensPlaced]);
   return (
     <div>
       <h1>8 Queens Game</h1>
       {gameWon ? <div>You won!</div> : null}
+      <div>Queens Placed: {queensPlaced}</div> {/* Display the number of queens placed */}
       {renderBoard()}
       <button onClick={handleReset}>Reset</button>
     </div>

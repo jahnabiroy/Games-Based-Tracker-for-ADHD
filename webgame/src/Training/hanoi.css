@@ -19,17 +19,18 @@
   
   .column-container {
     align-items: flex-end;
-    border: 1px solid grey;
-    height: 80vh;
+    /* border: 1px solid grey; */
+    /* height: 80vh; */
+    border-bottom: 15px solid #000;
     position: relative;
     width: 30%;
   }
   
   .center-bar {
-    background-color: brown;
-    width: 4%;
+    background-color: rgb(43, 1, 1);
+    width: 3%;
     height: 100%;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     position: absolute;
     left: 48%;
     z-index: -1;
@@ -37,36 +38,36 @@
   
   .tile {
     background-color: burlywood;
-    border: 1px solid black;
-    border-radius: 3px;
-    height: 40px;
+    /* border: 1px solid rgb(191, 152, 101); */
+    border-radius: 25px;
+    height: 42px;
     margin: auto;
-    z-index: 10;
-  }
-  
-  .win-message {
-    background-color: #080;
-    border-radius: 10px;
-    color: #ff0;
-    font-size: 42px;
-    font-weight: 700;
-    left: 50%;
-    position: absolute;
-    text-align: center;
-    text-shadow: 1px 1px #000;
-    top: 40%;
-    transform: translate(-50%, -50%);
-    width: 40%;
     z-index: 20;
   }
   
+  .win-message {
+    background-color: #ffc107;
+    border-radius: 15px;
+    color: #640764;
+    font-size: 2.5em;
+    font-weight: 700;
+    left: 50%;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    top: 35%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    z-index: 30;
+  }
+  
   .win-subtitle {
-    font-size: 24px;
+    font-size: 0.75em;
     font-weight: 500;
     margin: 10px 0;
   }
   
   .win-number {
-    color: #2ff;
+    color: #000;
   }
   
