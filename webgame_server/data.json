@@ -23,7 +23,9 @@
     "age": "1000",
     "score": 18,
     "eightqueen": 16,
-    "hanoi": 2,
-    "numberpuzzle": -1
+    "hanoi": 28,
+    "numberpuzzle": -1,
+    "memory": 10
   }
 }
+
