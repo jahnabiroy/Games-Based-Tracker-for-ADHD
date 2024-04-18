@@ -5,11 +5,8 @@ import Login from './Login/login';
 import Navbar from './Navbar';
 import Reg from './Reg/reg';
 import Profile from './Profile/profile';
-import TicTacToe from './Training/Tictactoe';
 import EightQueensGame from './Training/EigthQueen';
-import BetterAim from './Training/betterAim';
 import MemoryGame from './Training/memorygame';
-import ThreeCupSortingGame from './Training/cup';
 // import Jigsaw from './Training/jigsaw';
 import TowerOfHanoi from './Training/hanoi';
 import Game from './Training/15puzzle/Game';
@@ -25,12 +22,9 @@ function App() {
           <Route path="/login" element = {<Login/>}/>
           <Route path="/register" element = {<Reg/>}/>
           <Route path='/profile' element = {<Profile />}/>
-          <Route path='tictactoe' element = {<TicTacToe />} />
           <Route path='eightQueen' element = {<EightQueensGame />} />
-          <Route path='betterAim' element = {<BetterAim />} />
           {/* <Route path='jigsaw' element = {<Jigsaw/>} /> */}
           <Route path='memorygame' element = {<MemoryGame/>} />
-          <Route path='cupgame' element = {<ThreeCupSortingGame/>} />
           <Route path='hanoi' element = {<TowerOfHanoi/>} />
           <Route path='/game' element = {<Game />} />
           <Route path='/numberpuzzle' element = {<NumberPuzzle />} />

@@ -96,6 +96,7 @@ const MemoryGame = () => {
                     body: JSON.stringify({
                         rightMatches: rightMatches.length / 2,
                         wrongMatches: wrongMatches.length / 2,
+                        timetaken: elapsedTime
                     }),
                 });
                 const responseData = await response.json(); // Get response as text
@@ -107,7 +108,7 @@ const MemoryGame = () => {
         if(winner){
             sendData();
         }
-    }, [rightMatches, wrongMatches, winner]);
+    }, [rightMatches, wrongMatches, elapsedTime, winner]);
 
     return (
         <div className='container-fluid'>

@@ -120,10 +120,11 @@ app.get('/profile', (req, res) => {
             return res.status(404).json({ success: false, message: "User not found" });
         }
 
-        const { age, score, hanoi, numberpuzzle, eightqueen } = user;
-        // console.log("User profile retrieved successfully:", username_logged, age, score, eightqueen, hanoi, numberpuzzle);
-
-        res.json({ message: "Why fit in when you were born to stand out!", username: username_logged, age: age, score:score, hanoi:hanoi, numberpuzzle:numberpuzzle, eightqueen:eightqueen});
+        const { age, score, hanoimoves, hanoitime, eightqueen, numberpuzzlemoves, numberpuzzletime, memoryright, memorywrong, memorytime} = user;
+        res.json({ message: "Why fit in when you were born to stand out!", username: username_logged, age: age, score:score, 
+                                                                           hanoimoves:hanoimoves, hanoitime:hanoitime, eightqueen:eightqueen,
+                                                                           numberpuzzlemoves:numberpuzzlemoves, numberpuzzletime:numberpuzzletime,
+                                                                           memoryright:memoryright, memorywrong:memorywrong, memorytime:memorytime});
     });
 });
 
@@ -176,21 +177,9 @@ app.post('/game', (req, res) => {
     }
 });
 
-// app.post('/memorygame', (req, res) => {
-//     const { rightMatches, wrongMatches } = req.body;
-//     console.log('Received right matches:', rightMatches);
-//     console.log('Received wrong matches:', wrongMatches);
-
-//     var score = rightMatches*2 - wrongMatches;
-
-//     res.status(200).send({score});
-// });
-
 app.post('/memorygame', (req, res) => {
-    const { rightMatches, wrongMatches } = req.body;
+    const { rightMatches, wrongMatches, timeTaken } = req.body;
     const username = username_logged; // Assuming you have user information available in req.user
-    var score = rightMatches*2 - wrongMatches;
-    // Read the existing JSON file
     fs.readFile(dataFilePath, (err, data) => {
         if (err) {
             console.error('Error reading file:', err);
@@ -199,10 +188,12 @@ app.post('/memorygame', (req, res) => {
         let users = JSON.parse(data);
         // console.log('Parsed users:', users); // Debug statement
         if (users[username]) {
-            users[username].memory = score;
+            users[username].memoryright = rightMatches;
+            users[username].memorywrong = wrongMatches;
+            users[username].memorytime = timeTaken;
         } else {
             // If the username doesn't exist, create a new entry
-            users[username] = { memory: score };
+            users[username] = { memoryright: rightMatches, memorywrong: wrongMatches, memorytime: timeTaken};
         }
         // console.log('Updated users:', users); // Debug statement
         fs.writeFile(dataFilePath, JSON.stringify(users, null, 2), (err) => {
@@ -219,7 +210,6 @@ app.post('/memorygame', (req, res) => {
 app.post('/numberpuzzle', (req, res) => {
     const { moves, timeTaken } = req.body;
     const username = username_logged; // Assuming you have user information available in req.user
-    var score = moves*2 - timeTaken;
     // Read the existing JSON file
     fs.readFile(dataFilePath, (err, data) => {
         if (err) {
@@ -229,10 +219,11 @@ app.post('/numberpuzzle', (req, res) => {
         let users = JSON.parse(data);
         // console.log('Parsed users:', users); // Debug statement
         if (users[username]) {
-            users[username].numberpuzzle = score;
+            users[username].numberpuzzlemoves = moves;
+            users[username].numberpuzzletime = timeTaken;
         } else {
             // If the username doesn't exist, create a new entry
-            users[username] = { numberpuzzle: score };
+            users[username] = { numberpuzzlemoves: score, numberpuzzletime: timeTaken};
         }
         // console.log('Updated users:', users); // Debug statement
         fs.writeFile(dataFilePath, JSON.stringify(users, null, 2), (err) => {
@@ -249,7 +240,6 @@ app.post('/numberpuzzle', (req, res) => {
 app.post('/hanoi', (req, res) => {
     const { moves, timeTaken } = req.body;
     const username = username_logged; // Assuming you have user information available in req.user
-    var score = moves*2 - timeTaken;
     // Read the existing JSON file
     fs.readFile(dataFilePath, (err, data) => {
         if (err) {
@@ -259,10 +249,11 @@ app.post('/hanoi', (req, res) => {
         let users = JSON.parse(data);
         // console.log('Parsed users:', users); // Debug statement
         if (users[username]) {
-            users[username].hanoi = score;
+            users[username].hanoimoves = moves;
+            users[username].hanoitime = timeTaken;
         } else {
             // If the username doesn't exist, create a new entry
-            users[username] = { hanoi: score };
+            users[username] = { hanoimoves: moves, hanoitime: timeTaken};
         }
         // console.log('Updated users:', users); // Debug statement
         fs.writeFile(dataFilePath, JSON.stringify(users, null, 2), (err) => {
@@ -288,10 +279,10 @@ app.post('/EightQueen', (req, res) => {
         let users = JSON.parse(data);
         // console.log('Parsed users:', users); // Debug statement
         if (users[username]) {
-            users[username].eightqueen = queensPlaced * 2;
+            users[username].eightqueen = queensPlaced;
         } else {
             // If the username doesn't exist, create a new entry
-            users[username] = { eightqueen: queensPlaced * 2 };
+            users[username] = { eightqueen: queensPlaced };
         }
         // console.log('Updated users:', users); // Debug statement
         fs.writeFile(dataFilePath, JSON.stringify(users, null, 2), (err) => {

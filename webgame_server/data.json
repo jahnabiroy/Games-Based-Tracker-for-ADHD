@@ -21,11 +21,25 @@
   "thanos": {
     "password": "thanos",
     "age": "1000",
-    "score": 18,
-    "eightqueen": 16,
+    "score": 5,
     "hanoi": 28,
     "numberpuzzle": -1,
-    "memory": 10
+    "memory": 10,
+    "hanoimoves": 17,
+    "hanoitime": 3,
+    "eightqueen": 8,
+    "numberpuzzlemoves": 0,
+    "numberpuzzletime": 6,
+    "memoryright": 8,
+    "memmorywrong": 16
+  },
+  "": {
+    "hanoimoves": 15,
+    "hanoitime": 1,
+    "eightqueen": 8,
+    "numberpuzzlemoves": 0,
+    "numberpuzzletime": 6,
+    "memoryright": 8,
+    "memmorywrong": 16
   }
 }
-

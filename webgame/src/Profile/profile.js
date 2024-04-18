@@ -10,19 +10,103 @@ import Popup from 'reactjs-popup';
 export default function Profile() {
     const [userData, setUserData] = useState({ message: "", username: "", age: "" });
     const [renderQuiz, setRenderQuiz] = useState(false);
+    const [memory, setMemory] = useState(0);
+    const [focus, setFocus] = useState(0);
+    const [patience, setPatience] = useState(0);
+    const [hyperactivity, setHyperactivity] = useState(0);
 
     const handleQuiz = () => {
         setRenderQuiz(!renderQuiz);
     };
-
     useEffect(() => {
         fetch("http://localhost:8000/profile")
             .then((res) => res.json())
-            .then((data) => setUserData({ message: data.message, username: data.username, age: data.age, score: data.score,
-                                        hanoi : data.hanoi,
-                                        eightQueen : data.eightqueen,
-                                        numberpuzzle : data.numberpuzzle}));
+            .then((data) => setUserData({ message: data.message, username: data.username, age: data.age,
+                                         score: data.score,
+                                         hanoimoves : data.hanoimoves, hanoitiime : data.hanoitime,
+                                         eightQueen : data.eightqueen,
+                                         numberpuzzlemoves : data.numberpuzzlemoves, numberpuzzletime : data.numberpuzzletime,
+                                         memoryright : data.memoryright, memorywrong : data.memorywrong, memorytime : data.memorytime,}));
     }, []);
+    const updateMemory = () => {
+        setMemory(2.5 * userData.memoryright);
+    }  
+    const updateFocus = () => {
+        let temp;
+        let memorytime = userData.memorytime;
+        let eightQueen = userData.eightqueen;
+        let hanoimoves = userData.hanoimoves;
+        if (memorytime < 60) {
+            temp = 4;
+        } else if (memorytime < 120) {
+            temp = 3;
+        } else if (memorytime < 180) {
+            temp = 2;
+        } else if (memorytime < 240) {
+            temp = 1;
+        } else {   
+            temp = 0;
+        }   
+        let temp2 = 0;
+        if((30-hanoimoves)*8/15 > 0){
+            temp2 = (30-hanoimoves)*8/15
+        }
+        setFocus(eightQueen + temp2 + temp);
+    }
+    const upatePatience = () => {
+        let temp = 5;
+        let numberpuzzlemoves = userData.numberpuzzlemoves;
+        let hanoimoves = userData.hanoimoves;
+        if (numberpuzzlemoves < 100) {
+            temp = 12;
+        } else if (numberpuzzlemoves < 120) {
+            temp = 11;
+        } else if (numberpuzzlemoves < 140) {
+            temp = 10;
+        } else if (numberpuzzlemoves < 160) {
+            temp = 9;
+        } else if (numberpuzzlemoves < 200) {
+            temp = 7;
+        } else if (numberpuzzlemoves < 220) {
+            temp = 6;
+        } else if (numberpuzzlemoves < 300) {
+            temp = 5;
+        } 
+        let temp2 = 0;
+        if((30-hanoimoves)*8/15 > 0){
+            temp2 = (30-hanoimoves)*8/15
+        }
+        setPatience( temp2  + temp);
+    }
+    const updateHyperactivity = () => {
+        let temp1 = 0;
+        let memorywrong = userData.memorywrong;
+        let numberpuzzlemoves = userData.numberpuzzlemoves;
+        if(memorywrong <= 8){
+            temp1 = 10;
+        }
+        else{
+            if(20 - 6*memorywrong/5 > 0){
+                temp1 = 20 - 6*memorywrong/5;
+            }
+        }
+        let temp2;
+        if (numberpuzzlemoves < 140) {
+            temp2 = 10;
+        } else if (numberpuzzlemoves < 160) {
+            temp2 = 9;
+        } else if (numberpuzzlemoves < 200) {
+            temp2 = 7;
+        } else if (numberpuzzlemoves < 220) {
+            temp2 = 6;
+        } else if (numberpuzzlemoves < 300) {
+            temp2 = 5;
+        } else {        
+            temp2 = 0;
+        }
+        setHyperactivity(temp1 + temp2);
+
+    }
     return (
         <div>
             <div className="container-fluid" style={{backgroundColor: `#64057e`}}>
