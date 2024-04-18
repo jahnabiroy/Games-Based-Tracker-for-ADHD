@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './memorygame.css';
-import right from '../right_answer.wav'
-import wrong from '../wrong_answer.mp3'
-// import Popup from 'reactjs-popup';
-// import 'reactjs-popup/dist/index.css';
+import right from './right_answer.wav'
+import wrong from './wrong_answer.mp3'
+import Tutorial from './memgametut';
+import { Link } from 'react-router-dom';
+import Confetti from 'react-confetti';
 
 const MemoryGame = () => {
     const [cards] = useState(createDeck());
+    const [startGame, setStartGame] = useState(false);
+    const [closeTut, setCloseTut] = useState(true);
     const [flippedIndexes, setFlippedIndexes] = useState([]);
     const [matchedIndexes, setMatchedIndexes] = useState([]);
     const [rightMatches, setRightMatches] = useState([]);
     const [wrongMatches, setWrongMatches] = useState([]);
-    const [elapsedTime, setElapsedTime] = useState(0); // State for elapsed time
-    const [winner, setWinner] = useState(false); // State to track if the game is won
+    const [elapsedTime, setElapsedTime] = useState(0);
+    const [winner, setWinner] = useState(false);
 
     const correctAudio = new Audio(right);
     const wrongAudio = new Audio(wrong);
@@ -30,6 +33,22 @@ const MemoryGame = () => {
         }
         return array;
     }
+
+    function handleClose() {
+        setCloseTut(!closeTut);
+    }
+
+    function handleStart() {
+        setStartGame(!startGame);
+        restartGame();
+    }
+
+    const contentRef = useRef(null);
+    useEffect(() => {
+        if (startGame && contentRef.current) {
+            contentRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [startGame]);
 
     function handleCardClick(index) {
         if (matchedIndexes.includes(index) || flippedIndexes.includes(index)) return;
@@ -65,23 +84,24 @@ const MemoryGame = () => {
         setRightMatches([]);
         setWrongMatches([]);
         setElapsedTime(0);
-        setWinner(false); // Reset winner state
+        setWinner(false);
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
     }
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setElapsedTime(prevTime => prevTime + 1); // Increment elapsed time every second
+            setElapsedTime(prevTime => prevTime + 1);
         }, 1000);
 
         return () => {
-            clearInterval(timer); // Clean up the timer
+            clearInterval(timer);
         };
-    }, []); // Runs once on component mount
+    }, []);
 
     useEffect(() => {
         if (rightMatches.length / 2 === 8) {
-            console.log(winner);
-            setWinner(true); // Set winner state to true when the game is won
+            setWinner(true);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }, [rightMatches, winner]);
 
@@ -99,8 +119,8 @@ const MemoryGame = () => {
                         timetaken: elapsedTime
                     }),
                 });
-                const responseData = await response.json(); // Get response as text
-                console.log('Response from server:', responseData.score); // Log response data
+                const responseData = await response.json();
+                console.log('Response from server:', responseData.score);
             } catch (error) {
                 console.error('Error sending data:', error);
             }
@@ -111,10 +131,34 @@ const MemoryGame = () => {
     }, [rightMatches, wrongMatches, elapsedTime, winner]);
 
     return (
-        <div className='container-fluid'>
-            <h1 className='text-white mt-5' style={{fontFamily: `monospace`, fontSize: `3.5rem`}}>MEMORY GAME</h1>
-            <div className="memory-game">
-                <div className="cards-grid" style={{fontFamily: `monospace`}}>
+        <div className='container-fluid' style={{backgroundColor: `#440455`}}>
+            <div className='row p-5'>
+                <hr style={{color: `white`}}/>
+                <h1 className='text-white hanoi-title' style={{fontSize: `5rem`}}>CARD FLIP GAME</h1>
+                <hr style={{color: `white`}}/>
+                <div className='col-md-9'>
+                    <div className="p-2" style={{color: `rgb(225, 187, 245)`, fontSize: `1.2em`}}>
+                        The card flip game is a variation of the classic memory game, also known as Concentration, Match Match, 
+                        or Pairs. It involves flipping over pairs of cards to find matching pairs. Game starts with all the cards
+                        flipped out. The player can only see two cards at the same time. The objective is to flip all the cards 
+                        by correcty matching two cards.
+                        <br/><br/>
+                        Benefits of this game for individuals with ADHD : <br/><br/>
+                        1. <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`}}>Memory</span> <br/>
+                        2. <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`}}>Focus and Attention</span> <br/>
+                        3. <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`}}>Hyperactivity Regulation</span> <br/>
+                        <br/>
+                        However, as with any activity, its suitability may vary from person to 
+                        person. Some individuals with ADHD may find it engaging and enjoyable, while others may struggle to maintain 
+                        focus or interest due to its frustrating nature.
+                    </div>
+                    <button className="btn btn-warning m-2" onClick={handleStart} style={{fontSize: `1.2em`}}>{startGame ? 'RESTART GAME' : 'START GAME'}</button>
+                    <button className="btn btn-warning m-2" onClick={handleClose} style={{fontSize: `1.2em`}}>SEE TUTORIAL</button> 
+                </div>
+            </div>
+            {!closeTut && <Tutorial  onClose={handleClose}/>}
+            { startGame && <div className="memory-game" ref={contentRef}>
+                <div className="cards-grid">
                     {cards.map((card, index) => (
                         <div
                             key={index}
@@ -129,16 +173,24 @@ const MemoryGame = () => {
                     <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>❌ {wrongMatches.length/2}</button>
                     <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>⏰ {formatTime(elapsedTime)}</button>
                 </div>
-            </div>
+            </div>}
             {winner && (
+                <div className="overlay">
+                    <Confetti />
                 <div className="win-message">
-                    Congratulations!
+                    CONGRATULATIONS!
                 <div className="win-subtitle">
                     You are on the go!
                 </div>
+                <div className="win-subtitle p-1" style={{fontSize: `0.45em`}}>
+                    There is no ideal solution to this since luck is also a factor into this game. But optimisation can be made
+                    by remembering exact where the unmatched pair lies on the deck. This game aims to improve <b>memory</b> and  
+                    <b> attention/focus</b>.
+                </div>
                 <div className='win-subtitle'>
-                    <button onClick={restartGame}>Play Again</button>
-                    <button onClick={restartGame}>Go to Profile</button>
+                    <button className='btn btn-warning btn-lg' onClick={restartGame}>Play Again</button>
+                    <Link to='/profile' className='btn btn-warning btn-lg'>Go to Profile</Link>
+                </div>
                 </div>
                 </div>
                 )}
@@ -148,7 +200,6 @@ const MemoryGame = () => {
     );
 };
 
-// Function to format time as MM:SS
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;

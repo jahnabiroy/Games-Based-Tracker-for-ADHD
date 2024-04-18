@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // import bkg from '../assets/adhdback.png'
 import pfp from '../assets/profile.jpg'
 import { DoughnutGraph } from './Circular';
@@ -15,9 +15,18 @@ export default function Profile() {
     const [patience, setPatience] = useState(0);
     const [hyperactivity, setHyperactivity] = useState(0);
 
+    const quizSectionRef = useRef(null);
+
+    useEffect(() => {
+        if (renderQuiz && quizSectionRef.current) {
+            quizSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [renderQuiz]);
+
     const handleQuiz = () => {
         setRenderQuiz(!renderQuiz);
     };
+
     useEffect(() => {
         fetch("http://localhost:8000/profile")
             .then((res) => res.json())
@@ -129,7 +138,7 @@ export default function Profile() {
                             <div style={{fontSize: `1.5em`}}>⌛ HISTORY </div>
                             <hr/>
                             <div>
-                                {userData.hanoi}
+                                {userData.hanoimoves}
                             </div>
                         </div>
                         </div>
@@ -174,7 +183,7 @@ export default function Profile() {
                         </div>
                     </div>
                 </div>
-                {renderQuiz && <div className='row'>
+                {renderQuiz && <div className='row' ref={quizSectionRef}>
                     <div className='col-md-1'></div>
                     <div className='col-md-10 m-3 p-5 mb-5' style={{color:`white`, border: '1px solid #440455', borderRadius: '20px', background: '#440455'}}>
                         <div>🟢 🔴 🟡 </div>

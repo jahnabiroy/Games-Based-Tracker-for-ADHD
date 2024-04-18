@@ -1,0 +1,40 @@
+.memory-game2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}
+
+.cards2-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 100px); /* Adjust card width as needed */
+    grid-template-rows: repeat(2, 50px); /* Adjust card height as needed */
+    grid-gap: 10px; /* Adjust gap between cards as needed */
+}
+
+.card2 {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card2:hover {
+    transform: scale(1.2);
+}
+
+.card2.flipped {
+    background-color: white;
+    border: 1px solid black;
+    transform: rotateY(180deg) scale(1.2);
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}

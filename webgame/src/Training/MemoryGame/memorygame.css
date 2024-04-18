@@ -14,7 +14,7 @@
 .card {
   width: 200px;
   height: 100px !important;
-  background-color: rgb(176, 205, 215);
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,4 +37,16 @@
 
 .btn:hover {
   transform: scale(1.1);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

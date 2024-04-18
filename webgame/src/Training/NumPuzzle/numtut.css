@@ -1,0 +1,38 @@
+.board2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+  }
+  
+  
+  .puzzle-board2 {
+      display: grid;
+      grid-template-columns: repeat(2, 40px);
+      grid-template-rows: repeat(2, 40px);
+      gap: 5px;
+      margin: auto;
+    }
+    
+    .cell2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: linear-gradient(45deg, #ffc107, #f4dfa2);
+      cursor: pointer;
+      border: 2px solid fff;
+      font-size: 2rem;
+      color: #440455;
+      text-shadow: 0 0 1px #000;
+      border-radius: 2px;
+      height: 40px;
+      width: 40px;
+      transition: transform text-shadow 0.4s;
+    }
+  
+    .cell2:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 3px #440455;
+  
+    }
+    
