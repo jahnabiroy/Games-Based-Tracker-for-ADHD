@@ -1,70 +1,62 @@
-cd # Getting Started with Create React App
+# Game-Based Intervention for ADHD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project aims to diagnose individuals with Attention Deficit Hyperactivity Disorder (ADHD) through a series of interactive games. By utilizing game-based interventions, we aim to provide an engaging and effective method for assessing cognitive abilities and identifying ADHD symptoms.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+Follow these steps to start the project:
 
-### `npm start`
+1. Navigate to the `webgame_server` directory:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+   ```bash
+   cd webgame_server
+   ```
+2. Install dependencies:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+   ```bash
+   npm install
+   ```
+3. Start the server:
 
-### `npm test`
+   ```bash
+   npm start
+   ```
+4. Navigate to the `webgame` directory:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   cd ../webgame
+   ```
+5. Install dependencies:
 
-### `npm run build`
+   ```bash
+   npm install
+   ```
+6. Start the client:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Motivation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The motivation behind this project is to provide a novel approach to diagnosing ADHD by leveraging the engaging nature of games. Traditional diagnostic methods can be tedious and may not fully capture the cognitive challenges faced by individuals with ADHD. By integrating diagnostic assessments into games, we can create a more immersive and accurate evaluation process.
 
-### `npm run eject`
+## Games
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The following games are utilized in this project:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **8 Queens**: A puzzle game where players must place eight queens on a chessboard in such a way that no two queens threaten each other. This game tests logical thinking and spatial awareness.
+2. **Tower of Hanoi**: A mathematical puzzle where players must move a stack of disks from one rod to another, following specific rules. This game challenges spatial reasoning and planning skills.
+3. **Memory Matching**: A classic memory card game where players match pairs of cards by remembering their locations on a grid. This game challenges working memory and attention to detail.
+4. **1-15 Number Puzzle**: Also known as the sliding puzzle, players rearrange numbered tiles on a grid to form a sequential order. This game promotes problem-solving skills and concentration.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Future Improvements
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Integration of a more extensive questionnaire to gather detailed information about ADHD symptoms and severity.
+- Enhanced scoring system to provide more comprehensive assessments of cognitive abilities.
+- Development of additional games targeting specific cognitive domains relevant to ADHD.
 
-## Learn More
+## Contributors
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Abhinav Rajesh Shripad](mailto:cs1221596@cse.iitd.ac.in)
+- [Jahnabi Roy](mailto:cs12211094@cse.iitd.ac.in)
