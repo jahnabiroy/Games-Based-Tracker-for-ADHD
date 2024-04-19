@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{\textbf{Game-Based Tracker for ADHD}}
+\author{Abhinav Shripad (2022CS11596) \\ Jahnabi Roy (2022CS11094)}
+\date{\textbf{April 2024}}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Attention Deficit Hyperactivity Disorder \textbf{(ADHD)} is a \textbf{neurodevelopmental disorder} characterized by difficulty sustaining attention,
+hyperactivity, and impulsive behavior. It can significantly impact an individual's daily functioning,
+including academic performance and social interactions. As such, finding effective interventions to manage \textbf{ADHD} is crucial.
+
+In this report, we present a game-based approch to diagnosed designed to assist individuals diagnosed with \textbf{ADHD}. 
+The diagnosis utilizes a series of simple games aimed at improving attention, memory, and cognitive flexibility. 
+By engaging individuals in enjoyable activities, the intervention aims to enhance their cognitive abilities and reduce \textbf{ADHD}-related symptoms.
+
+Additionally, we have integrated a questionnaire about \textbf{ADHD} into the web-based game platform to gauge the individuals feelings. 
+This questionnaire allows us to gather valuable information about participants' \textbf{ADHD} symptoms, severity, and any coexisting conditions.
+
+\section{Games Used}
+\subsection{1-15 Number Puzzle}
+The 1-15 number puzzle, also known as the sliding puzzle, is a classic game where players rearrange numbered tiles on a grid to form a sequential order. 
+This game promotes \textbf{problem-solving skills}, \textbf{spatial reasoning}, and \textbf{concentration}. By requiring players to focus on the task at hand and think strategically, it can help improve \textbf{attention} and \textbf{strategic thinking} in individuals with \textbf{ADHD}.
+
+\subsection{Memory Card Game}
+The memory card game is a popular cognitive exercise where players match pairs of cards by remembering their locations on a grid. 
+This game challenges \textbf{working memory}, attention to detail, and \textbf{visual processing skills}. 
+Individuals with \textbf{ADHD} often struggle with working memory tasks, making this game particularly beneficial for enhancing their \textbf{memory} and \textbf{concentration abilities}.
+
+\subsection{8 Queens Game}
+The 8 Queens game is a puzzle that involves placing eight chess queens on an 8$*$8 chessboard in a way that no two queens threaten each other. 
+This game requires \textbf{careful planning}, \textbf{problem-solving}, and \textbf{spatial awareness}. 
+By engaging individuals in \textbf{logical thinking} and \textbf{strategic planning}, it can help improve their \textbf{cognitive flexibility} and \textbf{impulse control}, both of which are areas of difficulty for individuals with \textbf{ADHD}.
+
+\subsection{Tower of Hanoi Game}
+The Tower of Hanoi is a mathematical puzzle where players move a stack of disks from one rod to another, following specific rules. 
+This game challenges \textbf{spatial reasoning}, \textbf{planning}, and \textbf{sequential processing skills}. 
+By encouraging individuals to break down complex tasks into smaller steps and think ahead, it can help improve their organizational skills and attention span, which are often impaired in individuals with \textbf{ADHD}.
+
+\section{Scoring Functions Review}
+The scoring section of the document contains JavaScript functions responsible for updating scores related to various cognitive domains, such as memory, focus, patience, and hyperactivity, based on user data. Each function calculates a score based on specific criteria related to the corresponding cognitive domain and then updates the state variables accordingly.
+
+\subsection{Memory}
+The \textbf{Memory} score based on the number of correct memory-related actions performed by the user. It multiplies the number of correct actions by a coefficient and sets the memory score out of 20 accordingly.
+
+\subsection{Focus}
+Determines the \textbf{Focus} score based on factors such as memory time, eightQueen score, and hanoi moves. The score out of 20 is calculated using a combination of these factors, with different weights assigned based on specific conditions.
+
+\subsection{Patience}
+The \textbf{Patience} score based on the number of moves in the number puzzle game and hanoi moves. Similar to Focus, it assigns different weights to the number of moves based on specific conditions.
+
+\subsection{Hyperactivity}
+The \textbf{Hyperactivity} score considering factors like memory wrong actions and the number of moves in the number puzzle game. The score is computed based on specific conditions, with different weights assigned to each factor.
+
+Overall, these functions provide a systematic approach to scoring user performance in various cognitive domains, allowing for a comprehensive assessment of their abilities within the context of the game-based intervention for \textbf{ADHD}.
+
+\section{Conclusion}
+\textbf{ADHD} is a complex disorder that requires comprehensive interventions to address its multifaceted symptoms. Game-based interventions offer a promising approach to improving cognitive abilities and reducing \textbf{ADHD}-related difficulties. By incorporating engaging and stimulating games into therapy or educational programs, individuals with \textbf{ADHD} can develop essential skills while enjoying themselves. However, further research is needed to evaluate the efficacy of game-based interventions and optimize their implementation for individuals with \textbf{ADHD}.
+
+\end{document}
+`'

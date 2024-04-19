@@ -30,7 +30,7 @@ function Landing() {
                     <div className="col-md-4">
                     </div>
                     <div className="col-md-4 text-center">
-                        <Link to='/profile' className="btn btn-light btn-lg m-5" style={{fontWeight: `700`}}> GET STARTED</Link>
+                        <Link to='/login' className="btn btn-light btn-lg m-5" style={{fontWeight: `700`}}> GET STARTED</Link>
                     </div>
                     <div className="col-md-4"></div>
                 </div>
