@@ -144,9 +144,9 @@ const MemoryGame = () => {
                         by correcty matching two cards.
                         <br/><br/>
                         Benefits of this game for individuals with ADHD : <br/><br/>
-                        1. <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`}}>Memory</span> <br/>
-                        2. <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`}}>Focus and Attention</span> <br/>
-                        3. <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`}}>Hyperactivity Regulation</span> <br/>
+                        🌟 <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`, color: `yellow`}}>Memory</span> <br/>
+                        🌟 <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`, color: `yellow`}}>Focus and Attention</span> <br/>
+                        🌟 <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`, color: `yellow`}}>Hyperactivity Regulation</span> <br/>
                         <br/>
                         However, as with any activity, its suitability may vary from person to 
                         person. Some individuals with ADHD may find it engaging and enjoyable, while others may struggle to maintain 
@@ -168,10 +168,10 @@ const MemoryGame = () => {
                             {flippedIndexes.includes(index) || matchedIndexes.includes(index) ? card.symbol : '💡💭'}
                         </div>
                     ))}
-                    <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, transition: 'transform 0.2s'}} onClick={restartGame}>Restart Game</button>
-                    <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>✅ {rightMatches.length/2}</button>
-                    <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>❌ {wrongMatches.length/2}</button>
-                    <button className='btn btn-warning' style={{fontFamily: `monospace`, fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>⏰ {formatTime(elapsedTime)}</button>
+                    <button className='btn btn-warning' style={{fontSize: `1.5em`, transition: 'transform 0.2s'}} onClick={restartGame}>Restart Game</button>
+                    <button className='btn btn-warning' style={{fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>✅ {rightMatches.length/2}</button>
+                    <button className='btn btn-warning' style={{fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>❌ {wrongMatches.length/2}</button>
+                    <button className='btn btn-warning' style={{fontSize: `1.5em`, cursor: `default`, transition: 'transform 0.2s'}}>⏰ {formatTime(elapsedTime)}</button>
                 </div>
             </div>}
             {winner && (

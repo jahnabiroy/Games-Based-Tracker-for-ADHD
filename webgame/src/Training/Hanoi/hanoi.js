@@ -206,10 +206,10 @@ const App = () => {
             <br/><br/>
             Benefits of this game for individuals with ADHD :
             <br/><br/>
-            1. <span className="px-2" style={{fontSize: `1.15em`, textShadow: `0 0 2px #fff`}}>Attention</span> <br/>
-            2. <span className="px-2" style={{fontSize: `1.15em`, textShadow: `0 0 2px #fff`}}>Concentration</span> <br/>
-            3. <span className="px-2" style={{fontSize: `1.15em`, textShadow: `0 0 2px #fff`}}>Planning</span> <br/>
-            4. <span className="px-2" style={{fontSize: `1.15em`, textShadow: `0 0 2px #fff`}}>Problem-Solving Skills</span> <br/>
+            🌟 <span className="px-2" style={{fontSize: `1.15em`, textShadow: `0 0 2px #fff`, color: `yellow`}}>Attention</span> <br/>
+            🌟 <span className="px-2" style={{fontSize: `1.15em`, textShadow: `0 0 2px #fff`, color: `yellow`}}>Concentration</span> <br/>
+            🌟 <span className="px-2" style={{fontSize: `1.15em`, textShadow: `0 0 2px #fff`, color: `yellow`}}>Planning</span> <br/>
+            🌟 <span className="px-2" style={{fontSize: `1.15em`, textShadow: `0 0 2px #fff`, color : `yellow`}}>Problem-Solving Skills</span> <br/>
             <br></br>
             However, as with any activity, its suitability may vary from person to 
             person. Some individuals with ADHD may find it engaging and enjoyable, while others may struggle to maintain 

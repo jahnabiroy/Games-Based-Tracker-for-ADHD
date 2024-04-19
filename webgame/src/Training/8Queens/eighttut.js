@@ -26,7 +26,7 @@ const Tutorial = ({ onClose }) => {
           <>
             <p>Welcome to the Chess and Queens tutorial!</p>
             <p>In this game, your goal is to arrange the specified number of queens on the board such that they don't attack each other.</p>
-            <p>Let's get started by placing our first dot in one of the columns of the first row.</p>
+            <p>Let's get started with 4 queens first. Start by placing our first dot in one of the columns of the first row.</p>
             <EightQueensTut queensPlaced={queensPlaced} setQueensPlaced={setQueensPlaced} />
             <button onClick={nextStep} className="btn btn-primary">Next</button>
           </>

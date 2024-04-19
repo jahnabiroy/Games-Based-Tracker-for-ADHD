@@ -32,7 +32,7 @@ export default function Profile() {
             .then((res) => res.json())
             .then((data) => setUserData({ message: data.message, username: data.username, age: data.age,
                                          score: data.score,
-                                         hanoimoves : data.hanoimoves, hanoitiime : data.hanoitime,
+                                         hanoimoves : data.hanoimoves, hanoitime : data.hanoitime,
                                          eightQueen : data.eightqueen,
                                          numberpuzzlemoves : data.numberpuzzlemoves, numberpuzzletime : data.numberpuzzletime,
                                          memoryright : data.memoryright, memorywrong : data.memorywrong, memorytime : data.memorytime,}));
@@ -120,26 +120,58 @@ export default function Profile() {
         <div>
             <div className="container-fluid" style={{backgroundColor: `#64057e`}}>
                 <div className='row p-5'>
-                    {/* <h1 className='text-white' style={{fontFamily: `monospace`}}>USER PROFILE</h1> */}
-                    {/* <Link to='/tictactoe'>TicTacToe</Link>
-                    <Link to='/eightQueen'>EightQueensGame</Link>
-                    <Link to='/betterAim'>BetterAim </Link>
-                    <Link to='/memorygame'>MemoryGame </Link>
-                    <Link to='/cupgame'>CupGame </Link>
-                    <Link to='/hanoi'>TowerOfHanoi </Link>
-                    <Link to='/numberpuzzle'>NumberPuzzle </Link> */}
-                    <div className='col-md-6 text-white mx-5 py-3 px-4 text-center' style={{border: '1px solid #fff', borderRadius: '10px', background: 'transparent', backdropFilter: 'blur(15px)'}}>
+                    <div className='col-md-6 text-white mx-5 py-3 px-4' style={{border: '1px solid #fff', borderRadius: '10px', background: 'transparent', backdropFilter: 'blur(15px)'}}>
                         <div className='row'>
-                        <div className='col-md-5'>
+                        <div className='col-md-5 text-center'>
                             <div><DoughnutGraph score={userData.score} /></div>
-                            <Link to='/training' className='btn btn-warning mt-2' style={{fontWeight: `500`}}>TRAIN YOURSELF</Link>
+                            <Link to='/training' className='btn btn-warning mt-3 text-center' style={{fontWeight: `500`}}>TRAIN YOURSELF</Link>
                         </div>
-                        <div className='col-md-6'>
-                            <div style={{fontSize: `1.5em`}}>⌛ HISTORY </div>
+                        <div className='col-md-7'>
+                            <div className=' text-center' style={{fontSize: `1.5em`}}>⌛ GAMES PLAYED </div>
                             <hr/>
                             <div>
-                                {userData.hanoimoves}
-                            </div>
+                            {userData.hanoimoves && userData.hanoitime && (
+                                <div className='px-2 py-1 text-white mb-1' style={{backgroundColor: `#440455`, borderRadius: `5px`}}>
+                                    <div className='row'>
+                                        <div>Hanoi</div>
+                                    </div>
+                                    <div className='row'>
+                                        <div style={{fontSize: `0.75em`}}>Completed with {userData.hanoimoves} moves in {userData.hanoitime} s.</div>
+                                    </div>
+                                </div>
+                            )}
+                            {userData.memorytime && userData.memoryright && userData.memorywrong && (
+                                <div className='px-2 py-1 text-white mb-1' style={{backgroundColor: `#440455`, borderRadius: `5px`}}>
+                                    <div className='row'>
+                                        <div>Card Flip Game</div>
+                                    </div>
+                                    <div className='row'>
+                                        <div style={{fontSize: `0.75em`}}>Completed in {userData.memorytime}s with {userData.memoryright} rights and {userData.memorywrong} wrongs.</div>
+                                    </div>
+                                </div>
+                            )}
+                            {userData.numberpuzzletime && (
+                                <div className='px-2 py-1 text-white mb-1' style={{backgroundColor: `#440455`, borderRadius: `5px`}}>
+                                    <div className='row'>
+                                        <div>Number Puzzle Game</div>
+                                    </div>
+                                    <div className='row'>
+                                        <div style={{fontSize: `0.75em`}}>Completed with {userData.numberpuzzlemoves} moves in {userData.numberpuzzletime}s.</div>
+                                    </div>
+                                </div>
+                            )}
+                            {userData.eightQueen && (
+                                <div className='px-2 py-1 text-white' style={{backgroundColor: `#440455`, borderRadius: `5px`}}>
+                                    <div className='row'>
+                                        <div>Chess and Queens Game</div>
+                                    </div>
+                                    <div className='row'>
+                                        <div style={{fontSize: `0.75em`}}>Placed {userData.eightQueen} queens.</div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
                         </div>
                         </div>
                     </div>

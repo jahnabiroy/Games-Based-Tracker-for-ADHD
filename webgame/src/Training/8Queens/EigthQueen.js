@@ -118,9 +118,9 @@ const EightQueens = () => {
          <br/>
          <br/>
          Benefits of this game for individuals with ADHD : <br/><br/>
-          1. <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`}}>Focus and Working Memory</span><br/>
-          2. <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`}}>Impulse Control</span><br/>
-          3. <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`}}>Problem-Solving Ability</span><br/>
+         🌟 <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`, color: `yellow`}}>Focus and Working Memory</span><br/>
+         🌟 <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`, color: `yellow`}}>Impulse Control</span><br/>
+         🌟 <span className='px-2' style={{fontSize: `1.2em`, textShadow: `0 0 3px #fff`, color: `yellow`}}>Problem-Solving Ability</span><br/>
           <br/>
           However, as with any activity, its suitability may vary from person to 
           person. Some individuals with ADHD may find it engaging and enjoyable, while others may struggle to maintain 

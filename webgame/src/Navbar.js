@@ -40,9 +40,14 @@ export default function Navbar() {
                         <ul className="nav navbar-nav ms-auto">
                             <li className="navitem">
                                 {isLoggedIn ? (
+                                    <div>
+                                    <Link to='/profile' className='btn btn-warning' style={{ borderRadius: `10px`, marginLeft: '10px' }}>
+                                        <span className='align-middle p-2' style={{ fontWeight: `500` }}>PROFILE</span>
+                                    </Link>
                                     <Link to='/' onClick={handleLogout} className='btn btn-danger' style={{ borderRadius: `10px`, marginLeft: '10px' }}>
                                         <span className='align-middle p-2 text-white' style={{ fontWeight: `500` }}>LOGOUT</span>
                                     </Link>
+                                    </div>
                                 ) : (
                                     <div>
                                     <Link to='/' className='text-decoration-none'>
