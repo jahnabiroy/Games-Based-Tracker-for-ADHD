@@ -32,7 +32,7 @@ class Questionnaire extends Component {
       (option) => option.value === selectedOption
     ).points;
     this.setState((prevState) => ({ totalPoints: prevState.totalPoints + selectedPoints }));
-	console.log(totalPoints);
+	// console.log(totalPoints);
   };
 
   handleNextQuestion = () => {

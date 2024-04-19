@@ -20,7 +20,7 @@ export default function Reg() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Response from server:", data);
+        // console.log("Response from server:", data);
         setMessage(data.message);
         if (data.message === "User Registered Successfully!") {
           setRedirect(true);

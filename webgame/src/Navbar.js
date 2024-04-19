@@ -10,7 +10,7 @@ export default function Navbar() {
           .then((res) => res.json())
           .then((data) => {
               setIsLoggedIn(data.success);
-              console.log(data.message);
+            //   console.log(data.message);
           })
           .catch((error) => {
               console.error("Error logging out:", error);

@@ -133,7 +133,7 @@ const MemoryGame = () => {
                     }),
                 });
                 const responseData = await response.json();
-                console.log('Response from server:', responseData.score);
+                // ('Response from server:', responseData.score);console.log
             } catch (error) {
                 console.error('Error sending data:', error);
             }

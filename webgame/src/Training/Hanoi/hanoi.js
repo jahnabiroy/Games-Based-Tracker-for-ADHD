@@ -184,7 +184,7 @@ const App = () => {
               }),
           });
           const responseData = await response.json(); // Get response as text
-          console.log('Response from server:', responseData.score); // Log response data
+          // console.log('Response from server:', responseData.score); // Log response data
       } catch (error) {
           console.error('Error sending data:', error);
       }

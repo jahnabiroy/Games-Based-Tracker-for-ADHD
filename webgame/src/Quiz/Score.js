@@ -20,7 +20,7 @@ const Score = ({ totalPoints, onNextQuestion }) => {
       return response.json();
     })
     .then(data => {
-      console.log('Data sent successfully:', data);
+      // console.log('Data sent successfully:', data);
     })
     .catch(error => {
       console.error('Error sending data to the server:', error.message);

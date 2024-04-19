@@ -81,7 +81,7 @@ app.post('/register', (req, res) => {
                 console.error("Error writing data to file:", err);
                 return res.status(500).json({ success: false, message: "Internal Server Error" });
             }
-            console.log("User registered successfully:", username);
+            // console.log("User registered successfully:", username);
             res.json({ success: true, message: "User Registered Successfully!" });
         });
     });
@@ -89,7 +89,7 @@ app.post('/register', (req, res) => {
 
 app.get('/logout', (req, res) => {
     if (username_logged !== '') {
-        console.log(username_logged);
+        // console.log(username_logged);
         res.json({success: true,  message: "Still Logged In."})
     }
     else {
@@ -159,7 +159,7 @@ app.post('/profile', (req, res) => {
                 console.error("Error writing data to file:", err);
                 return res.status(500).json({ success: false, message: "Internal Server Error" });
             }
-            console.log("User score updated successfully:", username_logged);
+            // console.log("User score updated successfully:", username_logged);
             res.json({ success: true, message: "User score updated successfully" });
         });
     });
@@ -191,7 +191,7 @@ app.post('/memorygame', (req, res) => {
                 console.error('Error writing file:', err);
                 return res.status(500).send({ error: 'Internal server error' });
             }
-            console.log('Score updated successfully for', username);
+            // console.log('Score updated successfully for', username);
             res.status(200).send({ score: users[username].score });
         });
     });
@@ -221,7 +221,7 @@ app.post('/numberpuzzle', (req, res) => {
                 console.error('Error writing file:', err);
                 return res.status(500).send({ error: 'Internal server error' });
             }
-            console.log('Score updated successfully for', username);
+            // console.log('Score updated successfully for', username);
             res.status(200).send({ score: users[username].score });
         });
     });
@@ -251,7 +251,7 @@ app.post('/hanoi', (req, res) => {
                 console.error('Error writing file:', err);
                 return res.status(500).send({ error: 'Internal server error' });
             }
-            console.log('Score updated successfully for', username);
+            // console.log('Score updated successfully for', username);
             res.status(200).send({ score: users[username].score });
         });
     });
@@ -280,7 +280,7 @@ app.post('/EightQueen', (req, res) => {
                 console.error('Error writing file:', err);
                 return res.status(500).send({ error: 'Internal server error' });
             }
-            console.log('Score updated successfully for', username);
+            // console.log('Score updated successfully for', username);
             res.status(200).send({ score: users[username].score });
         });
     });

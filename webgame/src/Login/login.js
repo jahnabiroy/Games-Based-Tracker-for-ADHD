@@ -19,7 +19,7 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Response from server:", data);
+        // console.log("Response from server:", data);
         setMessage(data.message);
         if (data.message === "Authentication Successful!") {
             setRedirect(true);
