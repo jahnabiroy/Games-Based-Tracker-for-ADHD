@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Game</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+    <h1>Quiz Game</h1>
+    <div id="question-container">
+        <h2 id="question"></h2>
+        <ul id="choices"></ul>
+    </div>
+    <button id="next-btn">Next</button>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                choices: ["Paris", "London", "Berlin", "Madrid"],
+                answer: "Paris"
+            },
+            {
+                question: "What is 2 + 2?",
+                choices: ["3", "4", "5", "6"],
+                answer: "4"
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                choices: ["Venus", "Mars", "Jupiter", "Saturn"],
+                answer: "Mars"
+            }
+            // Add more questions here...
+        ];
+
+        let currentQuestionIndex = 0;
+        const questionElement = document.getElementById("question");
+        const choicesElement = document.getElementById("choices");
+        const nextButton = document.getElementById("next-btn");
+
+        function showQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+            choicesElement.innerHTML = "";
+            currentQuestion.choices.forEach(choice => {
+                const choiceItem = document.createElement("li");
+                choiceItem.textContent = choice;
+                choiceItem.addEventListener("click", () => {
+                    checkAnswer(choice);
+                });
+                choicesElement.appendChild(choiceItem);
+            });
+        }
+
+        function checkAnswer(selectedChoice) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selectedChoice === currentQuestion.answer) {
+                alert("Correct!");
+            } else {
+                alert("Incorrect!");
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                alert("Quiz ended!");
+            }
+        }
+
+        nextButton.addEventListener("click", showQuestion);
+
+        // Show the first question when the page loads
+        showQuestion();
+    </script>
+</body>
+</html>

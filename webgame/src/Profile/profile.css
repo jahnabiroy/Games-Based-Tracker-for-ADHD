@@ -1,0 +1,39 @@
+.vertical-line {
+    border-left: 1px solid #ccc;
+    height: 700px;
+  }
+  
+  .zoom-letters {
+    display: inline-block;
+  }
+  
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateY(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .zoom-letters:hover {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .age {
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  
+  .age:hover {
+    transform: scale(1.5);
+  }
+
+  .lols {
+    transition: transform 0.3s;
+    cursor: default;
+  }
+
+  .lols:hover {
+    transform: scale(1.08);
+  }
+  

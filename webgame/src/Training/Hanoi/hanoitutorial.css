@@ -1,0 +1,57 @@
+   /* body {
+    background-image: url('download.jpg');
+    background-size: cover;
+    background-position: center; 
+  } */
+  
+  .text-title {
+    font-weight: 700;
+  }
+  
+  .content {
+    /* border: 1px solid rgb(237, 226, 6); */
+    display: inline-flex;
+    font-family: sans-serif;
+    justify-content: space-evenly;
+    text-align: center;
+    width: 100%;
+  }
+
+  .hanoi-title {
+  transition: text-shadow 0.4s ease;
+  cursor: default;
+  text-shadow: 0 0 5px #ffffff;
+}
+
+.hanoi-title:hover {
+  text-shadow: 0 0 10px #ffffff; /* Correct syntax with all shadow values separated by commas */
+}
+  
+  .column-container {
+    align-items: flex-end;
+    /* border: 1px solid grey; */
+    /* height: 80vh; */
+    border-bottom: 20px solid #000;
+    border-radius: 10px;
+    position: relative;
+    width: 30%;
+  }
+  
+  .center-bar {
+    background-color: rgb(7, 0, 0);
+    width: 4%;
+    height: 100%;
+    /* border: 1px solid grey; */
+    position: absolute;
+    left: 48%;
+    z-index: 0;
+  }
+  
+  .tile {
+    background-color: burlywood;
+    /* border: 1px solid rgb(191, 152, 101); */
+    border-radius: 15px;
+    height: 30px;
+    margin: auto;
+    z-index: 20;
+  }
