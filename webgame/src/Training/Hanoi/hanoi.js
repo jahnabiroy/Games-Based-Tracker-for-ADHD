@@ -4,6 +4,7 @@ import moveSoundFile from "./move-sound.mp3";
 import Confetti from 'react-confetti';
 import Tutorial from "./hanoitutorial";
 import { Link } from "react-router-dom";
+import congrats from '../../assets/congratulations.wav'
 
 const App = () => {
   const [moveSound] = useState(new Audio(moveSoundFile));
@@ -13,6 +14,7 @@ const App = () => {
   const [dragId, setDragId] = useState();
   const [startGame, setStartGame] = useState(false);
   const [closeTut, setCloseTut] = useState(true);
+  const winning = new Audio(congrats);
   const [tiles, setTiles] = useState([
     {
       id: "Tile-1",
@@ -162,6 +164,7 @@ const App = () => {
       }, 1000);
     } else {
       clearInterval(interval);
+      winning.play();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     return () => clearInterval(interval);

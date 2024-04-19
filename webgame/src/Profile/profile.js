@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 // import bkg from '../assets/adhdback.png'
 import pfp from '../assets/profile.jpg'
 import { DoughnutGraph } from './Circular';
@@ -30,21 +30,40 @@ export default function Profile() {
     useEffect(() => {
         fetch("http://localhost:8000/profile")
             .then((res) => res.json())
-            .then((data) => setUserData({ message: data.message ?? '',
-                                         username: data.username ?? '', age: data.age ?? 0,
-                                         score: data.score ?? 0,
-                                         hanoimoves : data.hanoimoves ?? 0, hanoitime : data.hanoitime ?? 0,
-                                         eightQueen : data.eightqueen ?? 0,
-                                         numberpuzzlemoves : data.numberpuzzlemoves ?? 0, numberpuzzletime : data.numberpuzzletime ?? 0,
-                                         memoryright : data.memoryright ?? 0, memorywrong : data.memorywrong ?? 0, memorytime : data.memorytime?? 0,}));
+            .then((data) => {
+                setUserData({
+                    message: data.message ?? '',
+                    username: data.username ?? '',
+                    age: data.age ?? 0,
+                    score: data.score ?? 0,
+                    hanoimoves: data.hanoimoves ?? 0,
+                    hanoitime: data.hanoitime ?? 0,
+                    eightQueen: data.eightqueen ?? 0,
+                    numberpuzzlemoves: data.numberpuzzlemoves ?? 0,
+                    numberpuzzletime: data.numberpuzzletime ?? 0,
+                    memoryright: data.memoryright ?? 0,
+                    memorywrong: data.memorywrong ?? 0,
+                    memorytime: data.memorytime ?? 0,
+                });
+            });
     }, []);
+    
+    useEffect(() => {
+        if (userData.score !== undefined) {
+            updateMemory();
+            updateFocus();
+            updatePatience();
+            updateHyperactivity();
+        }
+    }, [userData]);
+
     const updateMemory = () => {
         setMemory(2.5 * userData.memoryright);
     }  
     const updateFocus = () => {
         let temp;
         let memorytime = userData.memorytime;
-        let eightQueen = userData.eightqueen;
+        let eightQueen = userData.eightQueen;
         let hanoimoves = userData.hanoimoves;
         if (memorytime < 60) {
             temp = 4;
@@ -63,7 +82,7 @@ export default function Profile() {
         }
         setFocus(eightQueen + temp2 + temp);
     }
-    const upatePatience = () => {
+    const updatePatience = () => {
         let temp = 5;
         let numberpuzzlemoves = userData.numberpuzzlemoves;
         let hanoimoves = userData.hanoimoves;
@@ -117,6 +136,8 @@ export default function Profile() {
         setHyperactivity(temp1 + temp2);
 
     }
+
+    const total_score = 40-userData.score + memory - hyperactivity + patience + focus;
     return (
         <div>
             <div className="container-fluid" style={{backgroundColor: `#64057e`}}>
@@ -124,24 +145,21 @@ export default function Profile() {
                     <div className='col-md-6 text-white mx-5 py-3 px-4' style={{border: '1px solid #fff', borderRadius: '10px', background: 'transparent', backdropFilter: 'blur(15px)'}}>
                         <div className='row'>
                         <div className='col-md-5 text-center'>
-                            <div><DoughnutGraph score={userData.score} /></div>
+                            <div><DoughnutGraph score={userData.score} memory={memory} focus={focus} patience={patience} hyperactivity={hyperactivity} /></div>
                             <Link to='/training' className='btn btn-warning mt-3 text-center' style={{fontWeight: `500`}}>TRAIN YOURSELF</Link>
                         </div>
                         <div className='col-md-7'>
                             <div className=' text-center' style={{fontSize: `1.5em`}}>⌛ GAMES PLAYED </div>
                             <hr/>
                             <div>
-                            {userData.hanoimoves && userData.hanoitime && (
                                 <div className='px-2 py-1 text-white mb-1' style={{backgroundColor: `#440455`, borderRadius: `5px`}}>
                                     <div className='row'>
-                                        <div>Hanoi</div>
+                                        <div>Tower of Hanoi</div>
                                     </div>
                                     <div className='row'>
                                         <div style={{fontSize: `0.75em`}}>Completed with {userData.hanoimoves} moves in {userData.hanoitime} s.</div>
                                     </div>
                                 </div>
-                            )}
-                            {userData.memorytime && userData.memoryright && userData.memorywrong && (
                                 <div className='px-2 py-1 text-white mb-1' style={{backgroundColor: `#440455`, borderRadius: `5px`}}>
                                     <div className='row'>
                                         <div>Card Flip Game</div>
@@ -150,8 +168,6 @@ export default function Profile() {
                                         <div style={{fontSize: `0.75em`}}>Completed in {userData.memorytime}s with {userData.memoryright} rights and {userData.memorywrong} wrongs.</div>
                                     </div>
                                 </div>
-                            )}
-                            {userData.numberpuzzletime && (
                                 <div className='px-2 py-1 text-white mb-1' style={{backgroundColor: `#440455`, borderRadius: `5px`}}>
                                     <div className='row'>
                                         <div>Number Puzzle Game</div>
@@ -160,8 +176,6 @@ export default function Profile() {
                                         <div style={{fontSize: `0.75em`}}>Completed with {userData.numberpuzzlemoves} moves in {userData.numberpuzzletime}s.</div>
                                     </div>
                                 </div>
-                            )}
-                            {userData.eightQueen && (
                                 <div className='px-2 py-1 text-white' style={{backgroundColor: `#440455`, borderRadius: `5px`}}>
                                     <div className='row'>
                                         <div>Chess and Queens Game</div>
@@ -170,7 +184,6 @@ export default function Profile() {
                                         <div style={{fontSize: `0.75em`}}>Placed {userData.eightQueen} queens.</div>
                                     </div>
                                 </div>
-                            )}
                         </div>
 
                         </div>
@@ -196,13 +209,20 @@ export default function Profile() {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-123" viewBox="0 0 16 16">
                                             <path d="M2.873 11.297V4.142H1.699L0 5.379v1.137l1.64-1.18h.06v5.961zm3.213-5.09v-.063c0-.618.44-1.169 1.196-1.169.676 0 1.174.44 1.174 1.106 0 .624-.42 1.101-.807 1.526L4.99 10.553v.744h4.78v-.99H6.643v-.069L8.41 8.252c.65-.724 1.237-1.332 1.237-2.27C9.646 4.849 8.723 4 7.308 4c-1.573 0-2.36 1.064-2.36 2.15v.057zm6.559 1.883h.786c.823 0 1.374.481 1.379 1.179.01.707-.55 1.216-1.421 1.21-.77-.005-1.326-.419-1.379-.953h-1.095c.042 1.053.938 1.918 2.464 1.918 1.478 0 2.642-.839 2.62-2.144-.02-1.143-.922-1.651-1.551-1.714v-.063c.535-.09 1.347-.66 1.326-1.678-.026-1.053-.933-1.855-2.359-1.845-1.5.005-2.317.88-2.348 1.898h1.116c.032-.498.498-.944 1.206-.944.703 0 1.206.435 1.206 1.07.005.64-.504 1.106-1.2 1.106h-.75z"/>
                                         </svg>
+                                        
                                         <Popup
-                                        trigger={<span style={{ marginLeft: '10px', fontSize: `23px`, fontWeight: `700`}}>{userData.score}</span>}
-                                        modal
-                                        closeOnDocumentClick
+                                            trigger={<span style={{ marginLeft: '10px', fontSize: `23px`, fontWeight: `700`}}>{total_score}</span>}
+                                            modal
+                                            closeOnDocumentClick
                                         >
-                                        <div className='m-3' style={{fontFamily: `Montserrat`, fontSize: `1.5em`}}>This is your <b style={{color: `#64057e`}}>ADHD</b> progression score. It is measured on various parameters like <i><b style={{color: `#64057e`}}>attention span</b></i>, <i><b style={{color: `#64057e`}}>communication skills</b></i>, <i><b style={{color: `#64057e`}}>working memory capacity</b></i>, and <i><b style={{color: `#64057e`}}>hyperactivity tendency</b></i>. This score is updated based on your performance in the training center and your choices made in the questionnaire. This is just an <b style={{color: `#64057e`}}>indicative</b> score. Everyone always gets better with time! <br/> <br/> Here, a <b>100</b> denotes highest severity of ADHD while <b>0</b> denotes the lowest.</div>
+                                            <div className='m-3 p-4' style={{ fontFamily: `Montserrat`, fontSize: `1.5em`, backgroundColor: `white`, borderRadius: '10px' , width: `700px`}}>
+                                                This is your <b style={{ color: `#64057e` }}>ADHD</b> progression score. It is measured on 
+                                                various parameters like <i><b style={{ color: `#64057e` }}>attention span</b></i>, <i><b style={{ color: `#64057e` }}>
+                                                communication skills</b></i>, <i><b style={{ color: `#64057e` }}>working memory capacity</b></i>, and 
+                                                <i><b style={{ color: `#64057e` }}>hyperactivity tendency</b></i>. This score is updated based on your performance in the training center and your choices made in the questionnaire. This is just an <b style={{ color: `#64057e` }}>indicative</b> score. Everyone always gets better with time! <br /> <br /> Here, a <b>0</b> denotes the highest severity of ADHD while <b>100</b> denotes the lowest.
+                                            </div>
                                         </Popup>
+
                                     </p>
                                     <hr/>
                                     <p style={{textAlign:`right`}}>
@@ -253,7 +273,6 @@ export default function Profile() {
                         </div>
                     </div>
                 </div>
-                <div className='row' style={{backgroundColor: `purple`}}>hello bitches</div>
             </div>
         </div>
     );

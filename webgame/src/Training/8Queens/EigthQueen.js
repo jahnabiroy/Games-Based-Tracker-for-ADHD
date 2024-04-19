@@ -3,6 +3,8 @@ import './EigthQueen.css';
 import Confetti from 'react-confetti';
 import { Link } from 'react-router-dom';
 import Tutorial from './eighttut';
+import congrats from '../../assets/congratulations.wav'
+import queensound from '../../assets/eightqueenmusic.wav'
 
 const EightQueens = () => {
   const [queens, setQueens] = useState([]);
@@ -10,6 +12,9 @@ const EightQueens = () => {
   const [closeTut, setCloseTut] = useState(true);
   const [gameWon, setGameWon] = useState(false);
   const [queensPlaced, setQueensPlaced] = useState(0); // State variable to keep track of the number of queens placed
+
+  const winning = new Audio(congrats);
+  const movemusic = new Audio(queensound);
 
   const handleCellClick = (row, col) => {
     if (gameWon) return; // Prevent placing queens after winning the game
@@ -27,6 +32,7 @@ const EightQueens = () => {
       const newQueens = [...queens, { row, col }];
       setQueens(newQueens);
       setQueensPlaced(newQueens.length); // Update the number of queens placed
+      movemusic.play();
       if (newQueens.length === 8) {
         setGameWon(true);
       }
@@ -104,6 +110,7 @@ const EightQueens = () => {
 
   useEffect(() => {
     if(gameWon){
+      winning.play();
       sendDataToServer();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }

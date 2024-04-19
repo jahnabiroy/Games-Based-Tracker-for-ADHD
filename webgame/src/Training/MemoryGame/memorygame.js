@@ -5,6 +5,7 @@ import wrong from './wrong_answer.mp3'
 import Tutorial from './memgametut';
 import { Link } from 'react-router-dom';
 import Confetti from 'react-confetti';
+import congrats from '../../assets/congratulations.wav'
 
 const MemoryGame = () => {
     const [cards] = useState(createDeck());
@@ -19,6 +20,7 @@ const MemoryGame = () => {
     const [gameOver, setGameOver] = useState(false);
     const correctAudio = new Audio(right);
     const wrongAudio = new Audio(wrong);
+    const winning = new Audio(congrats);
 
     function createDeck() {
         const symbols = ['🍎', '🍌', '🍉', '🍇', '🥑', '🍓', '🍊', '🍍'];
@@ -111,6 +113,7 @@ const MemoryGame = () => {
     useEffect(() => {
         if (rightMatches.length / 2 === 8) {
             setWinner(true);
+            winning.play();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }, [rightMatches, winner]);

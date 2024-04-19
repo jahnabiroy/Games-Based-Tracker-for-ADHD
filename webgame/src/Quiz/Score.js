@@ -21,12 +21,9 @@ const Score = ({ totalPoints, onNextQuestion }) => {
     })
     .then(data => {
       console.log('Data sent successfully:', data);
-      // Optionally, you can perform any actions after the data is successfully sent
-      // For example, navigate to a different page or display a success message
     })
     .catch(error => {
       console.error('Error sending data to the server:', error.message);
-      // Handle the error, e.g., display an error message to the user
     });
   }, [totalPoints]); // Execute the effect whenever totalPoints changes
 

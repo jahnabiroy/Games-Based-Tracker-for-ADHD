@@ -7,10 +7,11 @@ import Reg from './Reg/reg';
 import Profile from './Profile/profile';
 import EightQueensGame from './Training/8Queens/EigthQueen';
 import MemoryGame from './Training/MemoryGame/memorygame';
-// import Jigsaw from './Training/jigsaw';
 import TowerOfHanoi from './Training/Hanoi/hanoi';
 import NumberPuzzle from './Training/NumPuzzle/arrange';
 import Training from './Training/training';
+import Footer from './Footer';
+
 function App() {
   return (
     <div className="App">
@@ -22,12 +23,12 @@ function App() {
           <Route path="/register" element = {<Reg/>}/>
           <Route path='/profile' element = {<Profile />}/>
           <Route path='/eightQueen' element = {<EightQueensGame />} />
-          {/* <Route path='jigsaw' element = {<Jigsaw/>} /> */}
           <Route path='/memorygame' element = {<MemoryGame/>} />
           <Route path='/hanoi' element = {<TowerOfHanoi/>} />
           <Route path='/numberpuzzle' element = {<NumberPuzzle />} />
           <Route path='/training' element = {<Training />} />
         </Routes>
+        <Footer />
       </Router>
     </div>
   );

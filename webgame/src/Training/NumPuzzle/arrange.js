@@ -4,6 +4,7 @@ import moveSoundFile from './move-sound.mp3';
 import Confetti from 'react-confetti';
 import Tutorial from './numtutorial';
 import { Link } from 'react-router-dom';
+import congrats from '../../assets/congratulations.wav'
 
 const NumberPuzzle = () => {
   const [numbers, setNumbers] = useState(generateNumbers());
@@ -13,6 +14,7 @@ const NumberPuzzle = () => {
   const [moveCount, setMoveCount] = useState(0);
   const [timer, setTimer] = useState(0);
   const moveSound = new Audio(moveSoundFile);
+  const winning = new Audio(congrats);
 
   function handleClose() {
     setCloseTut(!closeTut);
@@ -46,6 +48,7 @@ const NumberPuzzle = () => {
       }, 1000);
     }
     else {
+      winning.play();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     return () => clearInterval(interval);
