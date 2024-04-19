@@ -30,12 +30,13 @@ export default function Profile() {
     useEffect(() => {
         fetch("http://localhost:8000/profile")
             .then((res) => res.json())
-            .then((data) => setUserData({ message: data.message, username: data.username, age: data.age,
-                                         score: data.score,
-                                         hanoimoves : data.hanoimoves, hanoitime : data.hanoitime,
-                                         eightQueen : data.eightqueen,
-                                         numberpuzzlemoves : data.numberpuzzlemoves, numberpuzzletime : data.numberpuzzletime,
-                                         memoryright : data.memoryright, memorywrong : data.memorywrong, memorytime : data.memorytime,}));
+            .then((data) => setUserData({ message: data.message ?? '',
+                                         username: data.username ?? '', age: data.age ?? 0,
+                                         score: data.score ?? 0,
+                                         hanoimoves : data.hanoimoves ?? 0, hanoitime : data.hanoitime ?? 0,
+                                         eightQueen : data.eightqueen ?? 0,
+                                         numberpuzzlemoves : data.numberpuzzlemoves ?? 0, numberpuzzletime : data.numberpuzzletime ?? 0,
+                                         memoryright : data.memoryright ?? 0, memorywrong : data.memorywrong ?? 0, memorytime : data.memorytime?? 0,}));
     }, []);
     const updateMemory = () => {
         setMemory(2.5 * userData.memoryright);

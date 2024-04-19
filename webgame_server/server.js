@@ -166,19 +166,9 @@ app.post('/profile', (req, res) => {
 });
 
 
-app.post('/game', (req, res) => {
-    const { winner } = req.body;
-    if (winner === 'X' || winner === 'O') {
-        // Do something with the winner data, e.g., save it to a file
-        console.log(`Winner: ${winner}`);
-        res.json({ success: true, message: "Winner data received successfully" });
-    } else {
-        res.status(400).json({ success: false, message: "Invalid winner data" });
-    }
-});
 
 app.post('/memorygame', (req, res) => {
-    const { rightMatches, wrongMatches, timeTaken } = req.body;
+    const { rightMatches, wrongMatches, timetaken } = req.body;
     const username = username_logged; // Assuming you have user information available in req.user
     fs.readFile(dataFilePath, (err, data) => {
         if (err) {
@@ -190,10 +180,10 @@ app.post('/memorygame', (req, res) => {
         if (users[username]) {
             users[username].memoryright = rightMatches;
             users[username].memorywrong = wrongMatches;
-            users[username].memorytime = timeTaken;
+            users[username].memorytime = timetaken;
         } else {
             // If the username doesn't exist, create a new entry
-            users[username] = { memoryright: rightMatches, memorywrong: wrongMatches, memorytime: timeTaken};
+            users[username] = { memoryright: rightMatches, memorywrong: wrongMatches, memorytime: timetaken};
         }
         // console.log('Updated users:', users); // Debug statement
         fs.writeFile(dataFilePath, JSON.stringify(users, null, 2), (err) => {

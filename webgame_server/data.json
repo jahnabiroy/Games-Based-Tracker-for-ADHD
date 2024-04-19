@@ -7,8 +7,8 @@
     "hanoi": -68,
     "numberpuzzle": -1,
     "memory": 6,
-    "hanoimoves": 15,
-    "hanoitime": 54,
+    "hanoimoves": 150,
+    "hanoitime": 5400,
     "memoryright": 8,
     "memorywrong": 7,
     "numberpuzzlemoves": 0,
@@ -30,14 +30,14 @@
     "score": 5,
     "hanoi": 28,
     "numberpuzzle": -1,
-    "memory": 10,
-    "hanoimoves": 17,
-    "hanoitime": 3,
-    "eightqueen": 8,
+    "hanoimoves": 15,
+    "hanoitime": 26,
+    "eightqueen": 4,
     "numberpuzzlemoves": 0,
-    "numberpuzzletime": 6,
-    "memoryright": 8,
-    "memmorywrong": 16
+    "numberpuzzletime": 16,
+    "memoryright": 1000,
+    "memorywrong": 1000,
+    "memorytime": 2
   },
   "": {
     "hanoimoves": 15,
@@ -46,6 +46,8 @@
     "numberpuzzlemoves": 0,
     "numberpuzzletime": 6,
     "memoryright": 8,
-    "memmorywrong": 16
+    "memmorywrong": 16,
+    "memorywrong": 15,
+    "memorytime": 73
   }
 }

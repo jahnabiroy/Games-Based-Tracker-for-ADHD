@@ -16,7 +16,7 @@ const MemoryGame = () => {
     const [wrongMatches, setWrongMatches] = useState([]);
     const [elapsedTime, setElapsedTime] = useState(0);
     const [winner, setWinner] = useState(false);
-
+    const [gameOver, setGameOver] = useState(false);
     const correctAudio = new Audio(right);
     const wrongAudio = new Audio(wrong);
 
@@ -39,6 +39,7 @@ const MemoryGame = () => {
     }
 
     function handleStart() {
+        sendDatatoserver();
         setStartGame(!startGame);
         restartGame();
     }
@@ -49,6 +50,14 @@ const MemoryGame = () => {
             contentRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [startGame]);
+
+    useEffect(() => {
+        if (rightMatches.length / 2 === 8) {
+            setWinner(true);
+            setGameOver(true); // Set game over state to true
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [rightMatches, winner]);
 
     function handleCardClick(index) {
         if (matchedIndexes.includes(index) || flippedIndexes.includes(index)) return;
@@ -79,6 +88,7 @@ const MemoryGame = () => {
     }
 
     function restartGame() {
+        sendDatatoserver();
         setFlippedIndexes([]);
         setMatchedIndexes([]);
         setRightMatches([]);
@@ -87,17 +97,17 @@ const MemoryGame = () => {
         setWinner(false);
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
     }
-
     useEffect(() => {
         const timer = setInterval(() => {
-            setElapsedTime(prevTime => prevTime + 1);
+            if (!gameOver) {
+                setElapsedTime(prevTime => prevTime + 1);
+            }
         }, 1000);
 
         return () => {
             clearInterval(timer);
         };
-    }, []);
-
+    }, [gameOver]);
     useEffect(() => {
         if (rightMatches.length / 2 === 8) {
             setWinner(true);
@@ -105,7 +115,7 @@ const MemoryGame = () => {
         }
     }, [rightMatches, winner]);
 
-    useEffect(() => {
+    function sendDatatoserver(){
         const sendData = async () => {
             try {
                 const response = await fetch('http://localhost:8000/memorygame', {
@@ -125,8 +135,11 @@ const MemoryGame = () => {
                 console.error('Error sending data:', error);
             }
         };
+        sendData();
+    }
+    useEffect(() => {
         if(winner){
-            sendData();
+            sendDatatoserver();
         }
     }, [rightMatches, wrongMatches, elapsedTime, winner]);
 

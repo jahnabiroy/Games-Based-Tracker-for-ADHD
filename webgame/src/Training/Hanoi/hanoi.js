@@ -51,6 +51,7 @@ const App = () => {
   const contentRef = useRef(null);
 
   function handleStart() {
+    sendDatatoserver();
     setStartGame(!startGame);
     restartGame();
   }
@@ -166,28 +167,30 @@ const App = () => {
     return () => clearInterval(interval);
   }, [winCondition, timer]);
 
-  useEffect(() => {
+  function sendDatatoserver(){
     const sendData = async () => {
-        try {
-            const response = await fetch('http://localhost:8000/hanoi', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    moves: moveCount,
-                    timeTaken: timer,
-                }),
-            });
-            const responseData = await response.json(); // Get response as text
-            console.log('Response from server:', responseData.score); // Log response data
-        } catch (error) {
-            console.error('Error sending data:', error);
-        }
+      try {
+          const response = await fetch('http://localhost:8000/hanoi', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  moves: moveCount,
+                  timeTaken: timer,
+              }),
+          });
+          const responseData = await response.json(); // Get response as text
+          console.log('Response from server:', responseData.score); // Log response data
+      } catch (error) {
+          console.error('Error sending data:', error);
+      }
     };
-
+    sendData();
+  }
+  useEffect(() => {
     if (winCondition) {
-      sendData();
+      sendDatatoserver();
   }
 }, [gameWon, moveCount, timer, winCondition]);
   return (

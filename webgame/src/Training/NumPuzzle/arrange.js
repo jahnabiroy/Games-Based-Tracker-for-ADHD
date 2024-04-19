@@ -24,6 +24,7 @@ const NumberPuzzle = () => {
   }
 
   function restartGame() {
+    sendDatatoserver();
     setNumbers(generateNumbers());
     setGameWon(false);
     setMoveCount(0);
@@ -88,13 +89,6 @@ const NumberPuzzle = () => {
     return true;
   }
 
-  // function handleCheatCode() {
-  //   const correctOrder = Array.from({ length: 15 }, (_, index) => index + 1);
-  //   correctOrder.push(null);
-  //   setNumbers(correctOrder);
-  //   setGameWon(true);
-  // }
-
   const renderCell = (number, index) => {
     return (
       <div
@@ -125,30 +119,33 @@ const NumberPuzzle = () => {
     return (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
            (Math.abs(col - emptyCol) === 1 && row === emptyRow);
   };
-  useEffect(() => {
+  function sendDatatoserver(){
     const sendData = async () => {
-        try {
-            const response = await fetch('http://localhost:8000/numberpuzzle', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    moves: moveCount,
-                    timeTaken: timer,
-                }),
-            });
-            const responseData = await response.json(); // Get response as text
-            console.log('Response from server:', responseData.score); // Log response data
-        } catch (error) {
-            console.error('Error sending data:', error);
-        }
+      try {
+          const response = await fetch('http://localhost:8000/numberpuzzle', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  moves: moveCount,
+                  timeTaken: timer,
+              }),
+          });
+          const responseData = await response.json(); // Get response as text
+          console.log('Response from server:', responseData.score); // Log response data
+      } catch (error) {
+          console.error('Error sending data:', error);
+      }
     };
-
+    sendData();
+  }
+  useEffect(() => {
     if (gameWon) {
-      sendData();
+      sendDatatoserver();
   }
 }, [gameWon, moveCount, timer]);
+
 
   return (
     <div>

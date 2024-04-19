@@ -68,6 +68,7 @@ const EightQueens = () => {
   }
 
   const handleReset = () => {
+    sendDataToServer();
     setQueens([]);
     setGameWon(false);
     setQueensPlaced(0); // Reset the number of queens placed
@@ -80,7 +81,7 @@ const EightQueens = () => {
         }
   }, [startGame]);
 
-  useEffect(() => {
+  function sendDataToServer() {
     const sendData = async () => {
         try {
             const response = await fetch('http://localhost:8000/EightQueen', {
@@ -89,7 +90,7 @@ const EightQueens = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                  queensPlaced: queensPlaced
+                    queensPlaced: queensPlaced
                 }),
             });
             const responseData = await response.json(); // Get response as text
@@ -98,8 +99,12 @@ const EightQueens = () => {
             console.error('Error sending data:', error);
         }
     };
+    sendData();
+  }
+
+  useEffect(() => {
     if(gameWon){
-      sendData();
+      sendDataToServer();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }, [queensPlaced]);

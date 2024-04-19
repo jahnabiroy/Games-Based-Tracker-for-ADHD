@@ -9,7 +9,6 @@ import EightQueensGame from './Training/8Queens/EigthQueen';
 import MemoryGame from './Training/MemoryGame/memorygame';
 // import Jigsaw from './Training/jigsaw';
 import TowerOfHanoi from './Training/Hanoi/hanoi';
-import Game from './Training/15puzzle/Game';
 import NumberPuzzle from './Training/NumPuzzle/arrange';
 import Training from './Training/training';
 function App() {
@@ -26,7 +25,6 @@ function App() {
           {/* <Route path='jigsaw' element = {<Jigsaw/>} /> */}
           <Route path='/memorygame' element = {<MemoryGame/>} />
           <Route path='/hanoi' element = {<TowerOfHanoi/>} />
-          <Route path='/game' element = {<Game />} />
           <Route path='/numberpuzzle' element = {<NumberPuzzle />} />
           <Route path='/training' element = {<Training />} />
         </Routes>
