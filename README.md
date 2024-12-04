@@ -58,5 +58,5 @@ The following games are utilized in this project:
 
 ## Contributors
 
-- [Abhinav Rajesh Shripad](mailto:cs1221596@cse.iitd.ac.in)
-- [Jahnabi Roy](mailto:cs12211094@cse.iitd.ac.in)
+- [Jahnabi Roy](https://github.com/jahnabiroy)
+- [Abhinav Rajesh Shripad](https://github.com/33Arsenic75)
